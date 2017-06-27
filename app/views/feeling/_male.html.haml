@@ -1,0 +1,48 @@
+#friendsdiv
+	%table{'style':'width: 100%;'}
+		%tr	
+			%td.tdimage
+				=image_tag male.profilepic, class: 'friendimg'
+			%td{'style':'width: 20px;'}
+			%td
+				%table
+					%tbody
+						%tr
+							%td
+								=link_to male.fullname , male , class: 'friendname'	
+						%tr
+							%td 
+								%p.friendscampus
+									=male.campus
+									,
+									=male.institute
+						%tr
+							%td
+								.catchphrase= male.about_amitian.catch_phrase
+						%tr
+							%td
+								Last Visited:
+								=time_ago_in_words(male.last_sign_in_at) +' ago'
+						%tr
+							%td
+								.relation{'style':'text-transform: capitalize'}
+									I am 
+									=male.about_amitian.relationship_status
+			%td
+				#followdiv.text-center.right{'style':'margin-right: 30px;'}
+					%table
+						%tbody
+							%tr
+								%td
+									.femaleform{'data-sug-id':"#{male.id}" , 'data-current-id': "#{current_amitian.id}"}
+										- if current_amitian.following?(male)
+											= render 'unfollow_female' , female: male
+										-else
+											= render 'confessions/follow' , sug: male
+							%tr
+								%td
+									= link_to 'Check out' , male
+							%tr
+								%td
+									
+									=render 'feelings_hotlist_form_female' ,female: male

@@ -1,0 +1,3 @@
+
+$('#follow_form_<%=@amitian.id %>').html("<%= escape_javascript(render('amitians/follow')) %>");
+$("#followers").html('<%=link_to pluralize(@amitian.followers.count.to_s , " Follower") %>');

@@ -1,0 +1,10 @@
+<% if @confessions %>
+<% @confessions.each do |c| %>
+$('#index_confessions').append("<%= j render 'confessions' , c: c  %>");
+$('.pagination').replaceWith("<%= j will_paginate @confessions %>");
+ <% end %>
+
+<% if !@confessions.next_page %>
+  $('.pagination').remove();
+<% end %>
+<% end %>

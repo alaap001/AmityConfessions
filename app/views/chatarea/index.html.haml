@@ -1,0 +1,17 @@
+#index_main_div
+	.row
+		.col-md-9.col-xs.9
+			%ul{'id':'conversations_list'}
+				-@conversation.each do |c|
+					= render 'conversations/conversation', c:c , amitian: current_amitian
+
+		.col-md-3.col-xs-3
+			.panel.panel-primary
+				.panel-heading
+					%h3.panel-title
+						Friends List
+				.panel-body
+					%ul
+						-@friends.each do |f|
+							%li=link_to f.fullname , conversations_path(amitian_id: f ), remote: true, method: :post
+

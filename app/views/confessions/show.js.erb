@@ -1,0 +1,9 @@
+<% @comment.each do |com| %>
+$('#all_comments').append("<%= j render 'confessions/show_comments_main_comment' , com: com %>");
+$('.pagination').replaceWith("<%= j will_paginate @comment %>");
+<% end %>
+
+<% if !@comment.next_page %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amitian_id: 1
+  eventtheme: MyString
+  location: MyString
+  start: 2017-06-25 02:15:20
+  end: 2017-06-25 02:15:20
+  description: 
+  tags: MyString
+  event_themepic: MyString
+  department: MyString
+  niche: MyString
+  club_id: 1
+
+two:
+  amitian_id: 1
+  eventtheme: MyString
+  location: MyString
+  start: 2017-06-25 02:15:20
+  end: 2017-06-25 02:15:20
+  description: 
+  tags: MyString
+  event_themepic: MyString
+  department: MyString
+  niche: MyString
+  club_id: 1

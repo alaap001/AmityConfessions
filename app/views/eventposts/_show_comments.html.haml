@@ -1,0 +1,33 @@
+.like_unlike_div{id: "like_#{c.id}"}
+	=render 'eventposts/like_unlike' , c: c
+%h4= pluralize(c.eventcomments.count,"Comment")
+-if (c.eventcomments.size > 5 )
+	= link_to 'load more' , c 
+- @array = c.eventcomments.last(5)
+-@array.each do |com|		
+	#single_comment.clearfix
+		#remove.right
+			-if current_amitian == com.amitian 
+				=link_to '',[com.eventpost,com] , method: :delete ,remote: true, class:'glyphicon glyphicon-remove'
+			-elsif current_amitian == c.amitian
+				=link_to '',[com.eventpost,com] , method: :delete ,remote: true, class:'glyphicon glyphicon-remove'
+		
+		.cmnt_dp.inactiveLink
+			- if !com.amitian.profilepic?
+				-if com.amitian.gender == 'Male'
+					=image_tag ('93.svg')
+				-else 
+					=image_tag('manager_photo.svg')
+			-else
+				=link_to image_tag(com.amitian.profilepic), com.amitian 
+
+		=link_to com.amitian.fullname+":" , com.amitian
+		=auto_link(com.content)
+		%br
+.load-more-container
+
+#form.clearfix		
+	=form_for( ([c,c.eventcomments.build]), remote: true ) do |f|
+		.cmnt
+			=f.text_area :content, placeholder: 'Add a comment...', class: "form-control comment_ta", id: "comment_content_#{c.id}"
+		=f.submit 'Comment'	, clasS:'btn btn-default cbtn'

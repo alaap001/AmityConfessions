@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hotlister_id: 1
+  hotlisted_id: 1
+
+two:
+  hotlister_id: 1
+  hotlisted_id: 1

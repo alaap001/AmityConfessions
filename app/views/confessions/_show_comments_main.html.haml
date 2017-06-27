@@ -1,0 +1,13 @@
+.like_unlike_div{id: "like_#{@confessions.id}"}
+	=render 'confessions/like_unlike' , c: @confessions
+%h4= pluralize(@comment.count,"Comment")
+#all_comments
+	-@comment.each do |com|		
+		= render 'show_comments_main_comment' , com: com
+.load-more
+	= will_paginate @comment 
+#form.clearfix		
+	=form_for( ([@confessions,@comment.build]), remote: true ) do |f|
+		.cmnt
+			=f.text_area :content, placeholder: 'Add a comment...', class: "form-control comment_ta", id: "comment_content_#{@confessions.id}"
+		=f.submit 'Comment'		, clasS:'btn btn-default cbtn'

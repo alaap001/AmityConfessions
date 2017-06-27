@@ -1,0 +1,11 @@
+<%if amitian_signed_in?%>
+<% if female != current_amitian %>
+  <div id="follow_form_feeling" , data-female-id = "<%= female.id %>" , data-current-id = "<%= current_amitian.id %>" >
+  <% if current_amitian.hotlisting?(female) %>
+    <%= render 'feelings_unhotlist_female', female: female %>
+  <% else %>
+    <%= render 'feelings_hotlist_female', female: female %>
+  <% end %>
+  </div>
+<% end %>
+<%end%>

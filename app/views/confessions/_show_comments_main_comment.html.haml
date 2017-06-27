@@ -1,0 +1,19 @@
+#single_comment.clearfix
+	#remove.right
+		-if current_amitian == com.amitian 
+			=link_to '',[com.confession,com] , method: :delete ,remote: true, class:'glyphicon glyphicon-remove'
+		-elsif current_amitian == @confessions.amitian
+			=link_to '',[com.confession,com] , method: :delete ,remote: true, class:'glyphicon glyphicon-remove'
+	
+	.cmnt_dp.inactiveLink
+		- if !com.amitian.profilepic?
+			-if com.amitian.gender == 'Male'
+				=image_tag ('93.svg')
+			-else 
+				=image_tag('manager_photo.svg')
+		-else
+			=link_to image_tag(com.amitian.profilepic), com.amitian 
+
+	=link_to com.amitian.fullname+":" , com.amitian
+	=auto_link(com.content)
+	%br

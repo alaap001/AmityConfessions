@@ -1,0 +1,18 @@
+-if @amitian.about_amitian != nil && current_amitian.about_amitian !=nil
+	-if @amitian != current_amitian	
+		-if current_amitian.friends?(@amitian)
+			= link_to 'Unfriend',friendship_path(id: @amitian.id), method: :delete, 'id':'unfriend' ,class: 'btn btn-info form-control'
+		-else
+			-if current_amitian.pending?(@amitian)
+				=link_to 'Request sent','#' , class: 'btn form-control btn-primary disabled'
+			-elsif current_amitian.requested?(@amitian)
+				=link_to 'Poke Back', friendship_path(id: @amitian.id), method: "put" , class: 'btn form-control btn-info'
+			-else
+				-if @gender == @interest
+					-if @gender == 'Female'
+						= link_to "Poke Her", friendships_path(friend_id: @amitian), method: :post , class: 'btn btn-warning form-control'
+					-elsif @gender == 'Male'
+						= link_to "Poke Him", friendships_path(friend_id: @amitian), method: :post , class: 'btn btn-warning form-control'
+				-else
+					= link_to "Interest Mismatch",'#', class: 'btn btn-warning form-control disabled'
+		

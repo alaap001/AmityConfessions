@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  amitian: one
+  content: MyText
+  event_post_image: MyString
+
+two:
+  event: two
+  amitian: two
+  content: MyText
+  event_post_image: MyString

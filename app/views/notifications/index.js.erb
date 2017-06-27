@@ -1,0 +1,7 @@
+<% if @notifications %>
+$('#notification').append("<%= j render @notifications %>");
+$('.pagination').replaceWith("<%= j will_paginate @notifications %>");
+<% if !@notifications.next_page %>
+  $('.pagination').remove();
+<% end %>
+<% end %>

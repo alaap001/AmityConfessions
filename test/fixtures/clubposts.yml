@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  club: one
+  amitian: one
+  content: MyText
+  clubpost_image: MyString
+
+two:
+  club: two
+  amitian: two
+  content: MyText
+  clubpost_image: MyString

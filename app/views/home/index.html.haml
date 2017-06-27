@@ -1,0 +1,92 @@
+#index_main_div_home
+	.home_div
+		.home_title
+	#home_container_div
+		#details.white
+			#home_start
+				#tagline
+					%p.h1
+						Step Into the Biggest Network of Amity
+					%hr.hr1
+				#detail1
+					%p 
+						Amity Humor is a unique platform build with the Idea to connect all the campuses of Amity and their students. Amity Humor is specifically designed to build your profiles and make relations with other students regard or regardless of your branch or campus. Amity Humor provide every amitian a unique platfrom called 
+						=link_to 'Feeling Lucky' , feeling_index_path , 'title':'Find a partner'
+						which give you a way to find and connect with a partner. Amity Humor allow you to confess your feelings without revealing your identity, if you wish so.
+
+			.container-fluid
+				#images.row
+					#left.col-md-4.col-sm-4.col-xs-12
+						=image_tag('confessionshome.jpg','class':'shadow2')
+					#right.col-md-4.col-sm-4.col-xs-12
+						=image_tag('tinder.png','class':'shadow2')
+					#mid.col-md-4.col-sm-4.col-xs-12
+						=image_tag('postsecret.jpg','class':'shadow2')
+			%hr
+			%hr
+			#why.text-center
+				%h1 WHY AMITY HUMOR ?
+			%hr
+			%hr
+			.container-fluid
+				#detail2.row
+					.col-sm-5.col-xs-12.home_anony
+						= image_tag 'anonypost.JPG' , class: 'thumbnail'
+					.col-sm-6.col-xs-offset-1.col-xs-12.home_anony_text
+						.text-center
+							.h1.grey Confess your mood, while you can also confess Anonymous
+						%p Posting your secret was never this easy
+						%p
+							Why reveal your identity when you can confess Annonymously with amityhumor.com.
+							%br
+							Next tym when you are frustrated because your attendance is short and need someone to blame but shy enough to not show your identity ?
+							Well, 
+							Go on post Anonymously so that no one knows its you but you somewhere deep inside your mischief heart.
+							Simply select your campus and institute to get 
+							%b=link_to 'started' , amitian_session_path
+						%p
+							So, next time there is this boy who is hot as hell and baby you wanna confess.... welcome to
+							@amityhumor.com
+							%br
+							or who knows Maybe you have a 
+							%em pataka 
+							senior ?
+						Don't stop from confessing because you actuallly don't have to reveal your identity.
+						%br
+			%hr
+			%hr
+			.container-fluid
+				#details3.row
+					.col-sm-5.col-xs-12.home_anony
+						= image_tag 'dating.jpg' , class: 'img-thumbnail'
+					.col-sm-6.col-xs-offset-1.col-xs-12.home_anony_text
+						.text-center
+							.h1.grey 
+								Write your own 
+								%s Love
+								Hope story.
+			%hr
+			%hr
+			.container-fluid
+				#details4.row
+					.col-sm-5.col-xs-12.home_anony
+						= image_tag 'texting.jpg' , class: 'img-thumbnail'
+					.col-sm-6.col-xs-offset-1.col-xs-12.home_anony_text
+						.text-center
+							.h1.grey 
+								Stay up close, cz you can also text on AmityHumor
+						%p Found your hope story ?
+						I think its time to convert it into something that matters... so AmityHumor gives you a simple capability to send texts to your partner if they accept your request and you both have a match.
+			%hr
+			%hr
+			.container-fluid.text-center
+				.h3.lead
+					Join Amity Humor Family Now 
+				= link_to 'Join Now', new_amitian_registration_path , class:'btn btn-primary'
+				%br
+				%small
+					Already have an account ? 
+					=link_to 'Sign in' , amitian_session_path
+
+			%footer.footer
+				= render 'home/footer'

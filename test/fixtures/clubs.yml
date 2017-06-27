@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amitian_id: 1
+  name: MyString
+  club_theme: MyString
+  description: 
+  club_themepic: MyString
+  club_cover: MyString
+  niche: MyString
+  website: MyString
+
+two:
+  amitian_id: 1
+  name: MyString
+  club_theme: MyString
+  description: 
+  club_themepic: MyString
+  club_cover: MyString
+  niche: MyString
+  website: MyString

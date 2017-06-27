@@ -1,0 +1,4 @@
+-if current_amitian.friends?(@amitian)
+	= link_to 'Send Message', chatarea_index_path , class: 'btn btn-success form-control send_message', 'data-sid': current_amitian.id, 'data-rid': @amitian.id
+-else
+	= link_to 'Send Message','#' , class: 'btn btn-success form-control send_message disabled'

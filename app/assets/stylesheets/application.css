@@ -1,0 +1,870 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require  devise_bootstrap_views
+ *= require jquery-ui
+ *= require token-input-facebook
+ *= require bootstrap-datetimepicker
+ *= require_tree .
+ *= require_self
+ */
+body{
+	background-color: rgba(0,191,154,.1);
+}
+ textarea{
+ 	resize: none;
+ }
+ #contentofmain{
+ 	position: relative;
+ 	top: -22px;
+ }
+ .notice{
+ 	position: absolute;
+ 	top: 30px;
+ }
+.navbar-nav > li >a{
+  color: #ffffff;
+  font-weight: 900;
+}
+.inactiveLink {
+   pointer-events: none;
+   cursor: pointer;
+}
+.dp img
+{
+	height: 100%;
+	width: 100%;
+
+}
+.dp{
+	height: 200px;
+width: 200px;
+}
+
+.divi{
+	background: #97ffd3; 
+	height: 200px;
+	margin: 10px 0;
+}
+
+.navmain{
+	height: 52px;
+}
+.navbar-inverse{
+		background: #00aa8d;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-header .navbar-brand{
+	color:#fff;
+	font-weight: 900;
+}
+
+
+
+#about_friends h1{
+padding-left: 15px;
+}
+#inner_gallery_border{
+	position: relative;
+	height: 450px;
+	margin: 30px 0px 0px 0px;
+}
+.innergal{
+overflow: hidden;
+	height: 33.3%;
+	width:33.3%;
+	position: absolute;	
+}
+.innergal img:hover{
+	cursor: pointer;
+	opacity: .78;
+	height: 125%;
+	width: 125%;
+	transition: height 1s,width 1s, opacity .7s;
+}
+.innergal img{
+	height: 100%;
+	width:100%;
+}
+.g1{
+	left: 0;
+width: 66.7%;
+height: 66.7%;
+}
+.g2{
+	right: 0;
+}
+.g4{
+	bottom: 0;
+	right: 0;
+}
+.g6{
+	bottom: 0;
+	left: 0;
+}
+.g3{
+right: 0;
+top: 33.3%;
+}
+.g5{
+	bottom: 0;
+	left: 33.3%;
+}
+#galleryedit{
+	position: relative;
+	left: 10px;
+	top: 27px;
+
+}
+/* confessions */
+.white{
+	background-color: #fff;
+}
+
+.index_comments{
+		background-color: rgba(0, 188, 212, 0.3);
+}
+#single_comment{
+margin: 3px;
+}
+.col{
+	z-index: 1;
+}
+
+#match{
+	margin-bottom: 10px;
+}
+#index_main_div_home{
+	width:100%;
+}
+#main_container{
+
+position: relative;
+top: 45px;
+}
+
+#confession_image img{
+height: 100%;
+width: 100%;
+max-height: 450px;
+
+}
+.post_image img{
+height: 100%;
+width: 100%;
+max-height: 450px;
+
+}
+#nav{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index:999999;
+	left:0;
+
+}
+
+#infinitescrolling{
+	top:80px;
+}
+#showuser_profile{
+	top:80px;
+}
+#index_main_div{
+	position: relative;
+	top:30px;
+}
+
+#input{
+	display: flex;
+	
+}
+.extra{
+	height: 300px;
+	background-color: #000990;
+	margin: 0 0 30px 0;
+}
+#index_status_div{
+	
+	display: inline-flex;
+	padding: 10px;
+}
+#club_form_div{
+	padding: 15px;
+}
+
+#input textarea{
+	margin: 0 30px 10px 0;
+	resize: none;
+	min-width: 50%;
+}
+#input_div select{
+height: 23px;
+margin-left: 10px;
+}
+#input_div input[type = 'submit']{
+margin: 10px;
+float: right;
+}
+#status_image_div{
+	margin-right:10px; 
+	height: 40px;
+	width: 40px;
+}
+#status_image_div img{
+height: 100%;
+width: 100%;
+}
+
+#status_image_div_edit{
+	height: 75px;
+	
+}
+#status_image_div_edit img{
+height: 100%;
+width: 100%;
+}
+
+#confessions_div{
+	margin: 20px 0 35px 0;
+	padding: 7px;
+}
+
+#followdiv,#message_form,#friendship{
+	margin: 10px 5px 10px 5px;
+}
+.glyphicon-home{
+	color: #fff;
+}
+#top_image{
+	width: 100%;
+	height: 100%;
+}
+#confessor_name{
+	display: flex;
+}
+
+.userdp{
+height: 40px;
+width: 40px;
+	margin-right: 7px;
+}
+.userdp img{
+height: 100%;
+width:100%;
+border-radius: 1em;
+}
+#profile_image{
+  height: 80px;
+  width: 80px;
+  margin: 5px 18px 0 15px;
+  position: relative;
+	}
+#profile_image img{
+	height: 70px;
+	width: 70px;
+	border-radius: .4em;
+}
+.grey{
+	color: #9e9e9e;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+#index_profile{
+	display: flex;
+}
+
+#tweet_details{
+	background-color: #efe;
+	border-top-color: #000;
+	border-top-style: solid;
+	border-top-width: 1px; 
+}
+#tweet_details ul li a:hover{
+text-decoration: none;
+}
+.nick{
+	font-size: 16px;
+}
+.grey a{
+	font-weight: bold;
+	font-size: 19px;
+	text-align: center;
+}
+#tweet_details ul li{
+list-style: none;
+display: inline-block;
+}
+#single_suggestion{
+	margin: 15px 5px 0 5px;
+}
+#single_suggestion img{
+	height: 41px;
+	width: 41px;
+}
+#index_footer{
+	margin: 20px 0 20px 0;
+}
+.shadow{
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+}
+#btn{
+	margin:20px; 
+	float: right;
+}
+#btn2{
+	float: right;
+	margin: 20px;
+}
+.glyphicon-remove{
+	color: grey;
+	opacity: .2;
+}
+.glyphicon-remove:hover{
+	opacity: .8;
+}
+.glyphicon-thumbs-up,.glyohicon-thumbs-down{
+	text-decoration: none;
+	margin-right: 6px;
+}
+.glyphicon-thumbs-up:hover,.glyohicon-thumbs-down:hover{
+	text-decoration: none;
+}
+#btn2 a{
+	color: #000;
+}
+#footer{
+	position:relative;
+	top: 60px;
+	height: 100px;
+	padding: 40px;
+}
+
+/*  */
+.glyphicon-inbox{
+	color: #000;
+margin: 15px 0px 0px 0px; 
+font-size: 18px;
+}
+.glyphicon-comment{
+		color: #000;
+margin-top: 15px;
+font-size: 20px;
+}
+.glyphicon-heart{
+	color: #000;
+margin: 15px 0px 0px 0px; 
+font-size: 20px;
+}
+.badge{
+	background-color: #004D40;
+}
+.notif{
+	position: relative;
+	right: 19px;
+	top: -9px;
+}
+.cmnt_dp{
+display: inline-block;
+}
+.cmnt_dp img{
+height: 30px;
+width: 30px;
+}
+#btn a{
+	color: #fff;
+}
+#footer li{
+	margin: 0 20px 0 20px;
+}
+#user_demo_profilediv img{
+	height: 100%;
+	width: 100%;
+	border-radius: 30%;
+}
+.m{
+	margin-top: 55px;
+}
+.cmnt textarea{
+resize: none;
+}
+.cmnt{
+	margin: 10px 20px 5px 5px; 
+}
+.cbtn{
+margin:8px;
+}
+.modalheader{
+
+}
+#help{
+	margin: 110px 0 0 0; 
+}
+#helpone img{
+	height: 100%;
+	width: 100%;
+}
+.pic{
+	height: 45px;
+	width: 45px;
+margin: 2px 8px 2px 5px;
+
+}
+
+#notif_dropdown{
+	overflow: auto;
+}
+.notif_lnk{
+	display: flex;
+	padding: 3px;
+	min-width: 350px;
+	border-top: .3px rgb(179,236,236) , solid; 
+	background-color: rgba(179,236,236,.4);
+	margin: 0 0 1px 0;
+}
+.notif_lnk a{
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+}
+#notification{
+
+	margin: 30px 0 0 0;
+}
+.modallink{
+	cursor: pointer;
+}
+.modal-content{
+	padding:20px;
+}
+#about_img{
+	height: 350px;
+	position: relative;
+	width: 100%;
+	margin: 30px 0px 30px 0px;
+}
+#about_img img{
+height: 100%;
+width: 100%;
+
+}
+.imghead{
+	text-transform: capitalize;
+	font-weight: lighter;
+	font-size: 50px;
+	font-stretch: 80px; 
+	color: #fff;
+	position: relative;
+	top: -200px;
+}
+#about_details img{
+height: 55px;
+width: 55px;
+}
+#searchresult{
+border: .5px solid grey;
+padding: 5px;
+}
+
+.login_div{
+	padding: 20px;
+}
+
+.loginform{
+	width: 65%;
+	margin: auto;
+	padding-bottom: 20px;
+}
+@media only screen and (max-width: 600px){
+.loginform{
+	width: 100%;
+	margin: auto;
+}
+}
+#info{
+
+	margin:20px 0 20px 0;
+	display: none;
+	border-radius: 6px; 
+}
+
+.friendimg{
+	width: 100%;
+	border: solid white 5px;
+	height: 100%;
+	margin: 4px;
+	
+}
+.friendname{
+	font-size: 20px;
+	text-transform: capitalize;
+}
+.friendscampus{
+	color: grey;
+	text-transform: uppercase;
+
+
+}
+
+hr{
+    height: 1px;
+   background-color: #fff;
+}
+.demo_dp{
+	height: 100px;
+	width: 100px;
+}
+.demo_cover{
+	height: 100px;
+	width: 100px;
+}
+.flex{
+    display: inline-flex;
+}
+
+.mydph:hover{
+	opacity: .75;
+	cursor: pointer;
+	transition: all .75s;
+}
+
+
+/* home css */
+
+#images img{
+height: 220px;
+width: 100%;
+margin: 20px 0px 40px 0px ;}
+
+.home_div{
+	background: url(amity.jpg) no-repeat center;
+position: relative;
+background-attachment: fixed;
+background-size: cover;
+	-webkit-background-size: cover;
+	overflow: hidden;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.shadow2{
+		-webkit-box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.85);
+-moz-box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.85);
+box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.85);
+}
+.find_match{
+   
+   margin-top: 10px;
+} 
+.home_title{
+	background: url(home_title.png) no-repeat;
+	background-position: center;
+	position: absolute;
+	height: 130px;
+	width: 100%;
+    top:50%;
+    margin-top: -85px;
+
+}
+#details{
+	position: relative;
+	top: -20px;
+}
+#tagline p{	
+	color: #e0e0e0;
+	font-weight: 200;
+	text-align: center;
+	padding-top: 30px;
+	background-color: #fff;
+}
+.hr1{
+	width: 0%;
+	height: 2.5px;
+	background-color: #0ee0ee;
+	transition: width 2s ease-out;
+}
+.grow{
+	width: 50%;
+}
+#detail1{
+text-align: center;
+margin: 0 auto 0 auto;
+	width: 50%;
+	
+}
+
+
+#index_main_div{
+	padding-top: 22px; 
+}
+
+.messages-list {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+ 
+
+.message_sent {
+  position: relative;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  margin: 5px 20px;
+  padding: 10px;
+  float: right;
+}
+
+.message_received {
+  background-color: #F1F0F0;
+  border-color: #bdbdbd;
+  margin: 5px 20px;
+  padding: 10px;
+  float: left;
+}
+.confession_img_preview img{
+	margin: 10px 0 10px 0;
+	width: 100px;
+	height: 100px;
+}
+
+.tdimage{
+	width: 155px;
+	height: 175px;
+}
+.searchimage{
+	width: 85px;
+	height: 85px;
+}
+ #friendsdiv{
+	border: solid 1px grey;
+	margin: 10px; 
+
+}
+.catchphrase{
+	font-weight: bold;
+	font-size: 19px;
+	border-top:solid 1px #bdbdbd;
+	border-bottom: solid 1px #bdbdbd; 
+	padding: 5px;
+}
+#confession_content p{
+	font-weight: 500;
+	font-size: 16px;
+	width: 100%;
+}
+.home_anony img{
+	width: 100%;
+
+}
+.home_anony_text{
+	font-weight: 500;
+	font-size: 15.5px;
+}
+#why h1{
+	font-weight: 900;
+}
+.about_image{
+	width: 100%;
+}
+.about_form{
+	margin-top: 20px;
+}
+.dislikes{
+	border-top: .5px solid #90CAF9; 
+
+}
+#mini_chat_box{
+	margin-top: 10px;
+}
+#mini_chat_list{
+	display: inline-block;
+	width: 100%;
+	margin-top: 10px;
+}
+li{
+	list-style: none;
+}
+.online{
+width: 8px;
+height: 8px;
+border-radius: 50%;
+margin-top: 12px;
+background-color: #76FF03;
+}
+.offline{
+width: 8px;
+height: 8px;
+border-radius: 50%;
+margin-top: 12px;
+background-color: grey;
+}
+#index_user_suggestion{
+	margin-top: 20px;
+}
+.link_dp{
+	width: 20px;
+	height: 20px;
+}
+.home_background{
+	
+
+}
+#single_suggestion2{
+ display: inline-block;
+ padding: 10px;
+ margin: 5px 10px 5px 10px; 
+
+}
+#single_suggestion2 img{
+	height: 75px;
+	width: 75px;
+}
+.sugdiv{
+
+	overflow: auto;
+
+}
+.sugremove:hover{
+	cursor: pointer;
+}
+.scrollmenu {
+    background-color: #fff;
+     height: 100%;
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.scrollmenu a {
+    color: black;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 10px;
+    text-decoration: none;
+}
+#single_clubname{
+	padding: 5px;
+	display: inline-block;
+	width: 100%;
+}
+#single_clubname a{
+	display: inline-block;
+	text-decoration: none;
+	
+}
+
+.member{
+	margin-top: 8px;
+	color: #000;
+}
+.live_search_results{
+max-height: 250px;
+overflow: auto;
+margin: 10px;
+padding: 10px;
+}
+
+.upload_div{
+	position: relative;
+	background-color: rgba(185,246,202,.25);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+.upload_btn{	
+	margin-top: 115px;
+	 background:  transparent;
+     line-height:  40px;
+     border:  2px solid black;
+     display:  inline-block;
+     float:  none;
+     display: inline-block;
+     text-align:  center;
+     padding:  5px;
+}
+.upload_btn a{
+     font-weight: 700;
+     text-decoration: none;
+     color: #000;
+}
+
+.upload_btn:hover{
+	border-color: #BDBDBD;
+	transition: all .8s;
+}
+#club_theme{
+height: 300px;
+width: 100%;
+margin-bottom: 30px;
+}
+#club_theme img{
+height: 100%;
+width: 100%;
+}
+.club_themepic{
+	height: 250px;
+	width: 250px;
+	margin-bottom: 15px;
+}
+.description{
+	padding: 8px;
+	background-color: #e0e0e0;
+}
+.club_about_head{
+font-weight: 700;
+font-size: 20px;
+}
+.theme{
+	font-weight: 500;
+	font-size: 27px;
+}
+.club_photo{
+	height: 150px;
+	margin-bottom: 3px;
+}
+.club_head{
+	padding: 5px;
+	margin-bottom: 5px; 
+	background-color: #EEEEEE;
+	border-bottom-color: #000;
+	border-bottom-style: solid;
+	border-bottom-width: 1px; 
+}
+#club_photos{
+	margin: 0 3px 10px 3px;
+}
+.single_member{
+	padding: 5px;
+	display: inline-block;
+	width: 100%;
+}
+
+.namehead{
+	width:100%;
+	margin-right: 10px;
+}
+.namehead a:hover{
+text-decoration: none;
+}
+
+.margin{
+	height: 30px;
+}

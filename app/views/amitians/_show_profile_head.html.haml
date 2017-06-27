@@ -1,0 +1,33 @@
+#showuser_profile
+	#show_amitian_cover.shadow
+		-if @amitian.cover?
+			=image_tag(@amitian.cover)
+		-else
+			=image_tag('uploadpic.png')
+	#amitian_details
+		#amitian_dp.shadow
+			- if !@amitian.profilepic?
+				-if @amitian.gender == 'Male'
+					=image_tag '93.svg', class:'thumbnail'
+				-else 
+					=image_tag 'manager_photo.svg' , class:'thumbnail'
+			-else
+				=link_to image_tag(@amitian.profilepic,{'class':'thumbnail inactivelink'})
+
+		#profile_navbar.navbar.navbar-default.shadow.col
+			#nav2.container-fluid
+				#nav_header.navbar-header
+					%button.navbar-toggle.collapsed{'data-toggle':'collapse','data-target':'#show_collapse','aria-expanded':'false'}
+						%span.icon-bar
+						%span.icon-bar
+						%span.icon-bar
+				#show_collapse.collapse.navbar-collapse.navbar-default.col
+					%ul.nav.navbar-nav.navbar-right.col
+						%li=link_to pluralize(@amitian.confessions.count,"Confession") , @amitian
+						%li= link_to pluralize(@amitian.followers.count,'Follower'), followers_amitian_path(@amitian) , id: 'followers' 
+						%li= link_to pluralize(@amitian.following.count,'Following'), following_amitian_path(@amitian)
+						%li= link_to 'Photos'
+						%li= link_to pluralize(@total, 'Connection') 
+						%li=link_to 'About' , about_amitian_path 
+						-if @amitian == current_amitian
+							%li=link_to 'Settings' , edit_amitian_registration_path(@amitian) 

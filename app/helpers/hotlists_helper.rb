@@ -1,0 +1,2 @@
+module HotlistsHelper
+end

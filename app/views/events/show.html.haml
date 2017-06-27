@@ -1,0 +1,105 @@
+#index_main_div
+	#events_main_div
+		#event_details.col-sm-3.col-xs-12
+			.text-center
+			
+				= image_tag 'calendar.png' , class: 'club_themepic img-rounded'
+				.theme.h2
+					= @event.eventtheme
+
+				%small.grey
+					( #	
+					= @event.niche+' )'
+		#event_posts.col-sm-6.col-xs-12
+			.scrollmenu.shadow
+				.top_sug_layer.clearfix
+					.left.grey{'style':'font-size:17px;'} 
+						Suggested Events
+					.right
+						
+						%span.glyphicon.glyphicon-remove.sugremove
+
+				.sugdiv.clearfix
+					-@eventsug.each do |sug|
+						#single_suggestion2.shadow
+							%table
+								%tbody
+									%tr
+										%td
+											.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+									%tr
+										%td{'style':'height:10px;'}
+									%tr
+										%td
+											.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+									%tr
+										%td
+											%small.grey
+												.text-center= 'host: '+sug.amitian.fullname
+									%tr
+										%td{'style':'height:10px;'}
+
+									%tr
+										%td
+											Attend
+
+
+			.margin
+			.scrollmenu.shadow
+				.top_sug_layer.clearfix
+					.left.grey{'style':'font-size:17px;'} 
+						Upcomming Events
+					.right{'style':'font-weight: 600;'}
+						= link_to 'Explore More Events' , events_path 
+						%span.glyphicon.glyphicon-remove.sugremove
+				.sugdiv.clearfix
+					-@eventupcomming.each do |sug|
+						#single_suggestion2.shadow
+							%table
+								%tbody
+									%tr
+										%td
+											.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+									%tr
+										%td{'style':'height:10px;'}
+									%tr
+										%td
+											.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+									%tr
+										%td
+											%small.grey
+												.text-center= 'host: '+sug.amitian.fullname
+									%tr
+										%td{'style':'height:10px;'}
+
+									%tr
+										%td
+											Attend
+			.margin
+			#club_theme.shadow
+				- if !@event.event_themepic? 
+					- if @event.amitian == current_amitian
+						.upload_div
+							.upload_btn.btn 
+								=link_to 'Upload Picture as Theme' 
+					-else
+						.upload_div
+				-else
+					= image_tag @event.event_themepic 
+
+			#club_form_div.white.shadow		
+				#club_input_div.clearfix
+					=form_for @confession do |f|
+						= hidden_field_tag :event_id, @event.id
+						#input
+							=f.text_area :content , require: true, placeholder: "Give some updates !!" , class: 'form-control' , 'id':'contentbox'
+						=f.file_field :event_post_image , class: 'form-control-file confession_file_image'
+						.confession_img_preview
+							=image_tag @confession.event_post_image , class:'thumbnail' 
+								
+							=f.submit 'Post' , class: 'btn btn-primary right'
+			#confession_details
+				- @posts.each do |c|
+					= render 'eventposts/event_posts' , c: c
+		
+		= render 'confessions/index_right_confession_div'

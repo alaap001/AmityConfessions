@@ -1,0 +1,35 @@
+#confessions_div.white
+	#remove.right
+		-if current_amitian == c.amitian
+			.dropdown
+				%button{'type':'button', 'role':'button' , 'class':"btn btn-default btn-xs dropdown-toggle", 'data-toggle':"dropdown" , 'aria-haspopup':"true" , 'aria-expanded':"false"}
+					%span.caret
+				%ul.dropdown-menu
+					%li= link_to 'Edit' , edit_confession_path(c)
+					%li=link_to 'Delete' , [c] ,remote: true, method: :delete  
+					
+					 
+	#confessor_name
+		.userdp
+			- if !c.amitian.profilepic?
+				-if c.amitian.gender == 'Male'
+					=image_tag ('93.svg')
+				-else 
+					=image_tag('manager_photo.svg')
+			-else
+				=link_to image_tag(c.amitian.profilepic), c.amitian 
+
+		.username
+			=link_to c.amitian.fullname , amitian_path(c.amitian) 
+			%p= time_ago_in_words(c.created_at)+' ago'
+	#confession_image{class: "confession_#{c.id}"}
+		#confession_content
+			%p= auto_link(simple_format(c.confession[0..350]))
+			-if c.confession.size > 350
+				= link_to 'load full confession' , c
+		=image_tag(c.confessionimage,{'class':'thumbnail'}) if c.confessionimage?
+		 
+		%br
+	.index_comments{id: "comments_#{c.id}"}
+		=render 'confessions/show_comments' , c: c
+		

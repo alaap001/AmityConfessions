@@ -1,0 +1,6 @@
+var conversation = $('#conversations_list').find("[data-conversation-id='" + "<%= @conversation.id %>" + "']");
+
+conversation.find('.messages-list').append("<%= j(render 'messages/message', message: @message, amitian: current_amitian) %>");
+var messages_list = conversation.find('.messages-list');
+var height = messages_list[0].scrollHeight;
+messages_list.scrollTop(height);

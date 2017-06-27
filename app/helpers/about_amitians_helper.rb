@@ -1,0 +1,2 @@
+module AboutAmitiansHelper
+end

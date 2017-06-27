@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bio: MyText
+  catch_phrase: MyString
+  dob: MyString
+  interest: MyString
+  relationship_status: MyString
+  amitian_id: 1
+
+two:
+  bio: MyText
+  catch_phrase: MyString
+  dob: MyString
+  interest: MyString
+  relationship_status: MyString
+  amitian_id: 1

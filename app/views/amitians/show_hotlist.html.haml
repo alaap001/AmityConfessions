@@ -1,0 +1,48 @@
+#index_main_div
+	.container
+		-if @amitians.any?
+			#hotlist_count{'style':'margin-bottom:30px;'}	
+				= render 'show_hotlist_head'
+			
+			- @amitians.each do |hotlist|
+				#friendsdiv.shadow
+					%table{'style':'width: 100%;'}
+						%tr	
+							%td.tdimage
+								=image_tag hotlist.profilepic, class: 'friendimg'
+							%td{'style':'width: 20px;'}
+							%td
+								%table
+									%tbody
+										%tr
+											%td
+												=link_to hotlist.fullname , hotlist , class: 'friendname'	
+										%tr
+											%td 
+												%p.friendscampus
+													=hotlist.campus
+													,
+													=hotlist.institute
+										%tr
+											%td
+												.catchphrase= hotlist.about_amitian.catch_phrase
+										%tr
+											%td
+												Last Visited:
+												=time_ago_in_words(hotlist.last_sign_in_at) +' ago'
+										%tr
+											%td
+												.relation{'style':'text-transform: capitalize'}
+													I am 
+													=hotlist.about_amitian.relationship_status
+									%br
+							%td
+								.destroy_hotlist{'id': "unfollow_#{hotlist.id}"}
+									= form_for(current_amitian.active_hotlists.find_by(hotlisted_id: hotlist.id), remote: true, html: { method: :delete }) do |f| 
+										= f.submit "Remove", class: "btn btn-danger form-control" 
+							%td{'style':'width: 20px;'}
+
+		-else
+			.alert.alert-warning
+				Your Hotlist is Empty,
+				=link_to 'Go to Feeling Lucky', feeling_index_path , class:'btn '

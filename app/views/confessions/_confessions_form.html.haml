@@ -1,0 +1,16 @@
+#form_status
+	-@anonymous.each do |a|
+		#input_div
+			=form_for @confession , html: {multipart: true}  do |f|
+				#input
+					=f.text_area :confession , require: true, placeholder: 'Confess !!' , class: 'form-control' , 'id':'contentbox'
+					=f.label :postAs
+					=f.select(:postid,options_for_select([[@confession.amitian.fullname,@confession.amitian.fullname],[a.fullname,a.fullname]]), class: 'form-control') 
+				=f.file_field :confessionimage , class: 'form-control-file confession_file_image'
+				.confession_img_preview
+					=image_tag @confession.confessionimage , class:'thumbnail' 
+				
+				=f.submit 'Confess' , class: 'btn btn-primary'
+
+
+		

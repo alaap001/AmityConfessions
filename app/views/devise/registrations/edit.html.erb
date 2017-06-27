@@ -1,0 +1,193 @@
+<div id= "index_main_div" class="login_div">
+<div class="loginform ">
+<%= bootstrap_devise_error_messages! %>
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <h4><%= t('.title', resource: resource_class.model_name.human , default: "Edit #{resource_name.to_s.humanize}") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+     <div class="form-group">
+        <%= f.label :fullname %>
+        <%= f.text_field :fullname, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :nickname %>
+        <%= f.text_field :nickname, class: 'form-control' %>
+      </div>
+       <div class="form-group">
+        <%= f.label :email %>
+        <div class = "input-group">
+        <span class="input-group-addon" id="email_addon">
+        @
+        </span>
+        <%= f.email_field :email, class: 'form-control' ,'aria-describedby':'email_addon' , 'placeholder':'Email' %>
+      </div>
+      </div>
+
+       <div class = 'form-group'>
+<%= f.label :gender%>
+<div class = "input-group">
+<%= f.radio_button :gender , 'Male' %>  
+<%= f.label :Male%>
+</div>
+<div class="input-group">
+<%= f.radio_button :gender, 'Female'%>
+<%= f.label :Female%>
+       </div>
+       </div>
+
+        <div class="form-group"></div>
+      <div class="form-group">
+        <%= f.label :Select_your_campus %>
+         <div class = "input-group">
+        <span class="input-group-addon" id="campus_addon">
+        Campus
+        </span>
+        <%=f.text_field :campus ,class: 'form-control','aria-describedby':'campus_addon' , 'list': 'campuses' , 'placeholder': ' eg: Noida' %>
+      <datalist id="campuses">
+        
+        <option value=""/>
+ <option value="Noida"/>
+ <option value="Lucknow"/>
+  <option value="Jaipur"/>
+ <option value="Gurgaon"/>
+ <option value="Gwalior"/>
+ <option value="Mumbai"/>
+ <option value="Greater Noida"/>
+ <option value="Raipur"/>
+ <option value="Kolkata"/>
+ <option value="Ranchi"/>
+ <option value="Ahmedabad"/>
+ <option value="Banglore"/>
+ <option value="Bhubaeswar"/>
+ <option value="Chandigarh"/>
+ <option value="Chennai"/>
+ <option value="Hydrabad"/>
+ <option value="Indore"/>
+ <option value="Kochi"/>
+ <option value="Patna"/>
+ <option value="Pune"/>
+ <option value="London"/>
+ <option value="Dubai"/>
+<option value="Singapure"/>
+ <option value="Mauritius"/>
+ <option value="Abu Dhabi"/>
+ <option value="South Africa"/>
+ <option value="Romania"/>
+ <option value="China"/> 
+      </datalist>
+      </div>
+
+      </div>
+         <div class="form-group"></div>
+      <div class="form-group">
+        <%= f.label :Select_your_Institute%>
+         <div class = "input-group">
+        <span class="input-group-addon" id="institute_addon">
+        Institute
+        </span>
+        <%=f.text_field :institute ,class: 'form-control','aria-describedby':'institute_addon' , 'list': 'institutes' , 'placeholder': ' eg: Amity Institute of Applied Sciences , Amity School of Engineering and Technology' %>
+      <datalist id="institutes">
+        <option value="Amity Institute of "/>
+         <option value="Amity Institute of "/>
+ <option value="Amity Institute of Commerce and finance"/>
+ <option value="Amity Institute of Advanced Legal Studies"/>
+ <option value="Amity Institute of Aerospace Engineering"/>
+ <option value="Amity Institute ofArthopology "/>
+ <option value="Amity Institute of Applied Sciences"/>
+ <option value="Amity Institute of Behavioural Health & Allied Science"/>
+ <option value="Amity Institute of Biotechnology"/>
+ <option value="Amity Institute of Competitive Intelligence and Strategic Management"/>
+ <option value="Amity Institute of Corporate Communications"/>
+ <option value="Amity Institute of Education"/>
+ <option value="Amity Institute of Education and Training"/>
+ <option value="Amity Institute of English Studies and Research"/>
+ <option value="Amity Institute of Environmental Sciences"/>
+ <option value="Amity Institute of Environmental Toxicology Safety & Management"/>
+ <option value="Amity Institute of Food Technology"/>
+ <option value="Amity Institute of Geo Informatics & Remote Sensing"/>
+ <option value="Amity Institute of Global Warming & Ecological Studies"/>
+ <option value="Amity Institute of Horticulture Studies & Research"/>
+ <option value="Amity Institute of Hospital Administration"/>
+ <option value="Amity Institute of Information Technology"/>
+ <option value="Amity Institute of Marine Science and Technology"/>
+ <option value="Amity Institute of Microbial Technology"/>
+ <option value="Amity Institute of Nano Technology"/>
+ <option value="Amity Institute of Nuclear Science & Technology"/>
+ <option value="Amity Institute of Organic Agriculture"/>
+ <option value="Amity Institute of Pharmacy"/>
+ <option value="Amity Institute of Physiology & Allied Sciences"/>
+ <option value="Amity Institute of Physiotherapy"/>
+ <option value="Amity Institute of Phytochemistry & Phytomedicine"/>
+ <option value="Amity Institute of Psychology & Allied Sciences"/>
+ <option value="Amity Institute of Rehabilitation Sciences"/>
+ <option value="Amity Institute of Renewable & Alternative Energy"/>
+ <option value="Amity Institute of Social Sciences"/>
+ <option value="Amity Institute of Space Science & Technology"/>
+ <option value="Amity Institute of Telecom Engineering & Mgmt"/>
+ <option value="Amity Institute of Training & Development"/>
+ <option value="Amity Institute of Travel & Tourism"/>
+ <option value="Amity Institute of Virology & Immunology"/>
+ <option value="Amity Institute of Wildlife Sciences"/>
+ <option value="Amity International Centre for Post Harvest Technology & Cold Chain Management "/>
+ <option value="Amity International Business School "/>
+ <option value="Amity School of Architecture & Planning"/>
+ <option value="Amity School of Business"/>
+ <option value="Amity School of Fashion Technology"/>
+ <option value="Amity School of Fine Arts"/>
+ <option value="Amity School of Foreign Languages"/>
+ <option value="Amity School of Hospitality"/>
+ <option value="Amity School of Insurance, Banking & Actuarial Science"/>
+ <option value="Amity School of Communication"/>
+ <option value="Amity School of Economics"/>
+ <option value="Amity School of Engineering"/>
+ <option value="Amity School of Engineering and Technology"/>
+<option value="Amity School of Natural Resources and Sustainable Development"/>
+<option value="Amity School of Performing Arts"/>
+<option value="Amity School of Physical Education & Sports Sciences"/>
+<option value="Amity Global School"/>
+
+
+   </datalist>
+      </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+      <%= f.label :Profile_Picture %>
+        <%= f.file_field :profilepic, class: 'form-control-file demo_dp_file' %>
+
+<%= f.check_box :remove_profilepic %>
+        <%= f.label :remove_profilepic %>
+</div>
+      <img class= "demo_dp" src=<%= current_amitian.profilepic if current_amitian.profilepic? %> alt="Profile pic"/>
+      
+      <div class="form-group coverdiv">
+      <%= f.label :Cover_Picture %>
+        <%= f.file_field :cover, class: 'form-control-file demo_cover_file' %>
+        <%= f.check_box :remove_cover %>
+        <%= f.label :remove_cover %>
+        </div>
+         
+         <img class= "demo_cover" src=<%= current_amitian.cover if current_amitian.cover? %> alt="Profile pic"/>
+
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', default: 'we need your current password to confirm your changes') %>)</i>
+        <%= f.password_field :current_password, class: 'form-control' %>
+      </div>
+      <%= f.submit t('.update', default: 'Update'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<p><%= t('.unhappy', default: 'Unhappy') %>? <%= link_to t('.cancel_my_account', default: 'Cancel my account'), registration_path(resource_name), data: { confirm: t('.are_you_sure', default: "Are you sure?") }, method: :delete %>.</p>
+
+<%= link_to t('.back', default: 'Back'), :back %>
+</div>
+</div>
+</div>

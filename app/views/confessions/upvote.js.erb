@@ -1,0 +1,4 @@
+
+$('#like_<%=@confessions.id %>').html('<%= j render "confessions/like_unlike" , c: @confessions  %>');
+$('#like_link_<%= @confessions.id %>').css('color','#42A5F5');
+

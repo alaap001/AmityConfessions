@@ -1,0 +1,130 @@
+#index_main_div
+	#clubs_show_page
+		#club_details.col-sm-3
+			#club_themepic.text-center
+				- if !@club.club_themepic? 
+					= image_tag '93.svg' , class: 'club_themepic img-rounded'
+					.theme.h2
+						= @club.clubname
+					%small.grey
+						( #	
+						= @club.club_theme+' )'
+				-else
+					= image_tag @club.club_themepic , class: 'club_themepic img-rounded '
+					.theme
+						= @club.clubname
+					%small.grey
+						( #	
+						= @club.club_theme+' )'
+
+			#club_about_div
+				.grey.club_about_head About
+				.description
+					%p= @club.description
+				.website.lead
+					= auto_link(@club.website)
+
+			#club_photos.row.white
+				.club_head.clearfix
+					.left{'style':'font-size: 17px;'} Photos 
+					= link_to 'See all' , '' , class: 'right grey' 
+				 
+				- @gallery.each do |post|
+					= image_tag post.clubpost_image , class: 'club_photo col-sm-6 thumbnail'
+
+			#club_members.white
+				.club_head{'style':'font-size: 17px;'}
+					Members
+				 
+				- if @member.size == 1
+					.alert.alert-warning
+						No Members in this Club... 
+				- @club.active_invitations.each do |member|
+					.single_member.clearfix
+						= image_tag member.profilepic , class: "userdp"
+						=link_to member.fullname , member
+						.right roll
+				%hr
+				- if current_amitian == @club.amitian
+					#invite_friend
+						.navbar-form{'role':'search'}
+							=form_tag club_path(@club) , method: :get , id:'club_member_search' do 
+								.form-group
+									=text_field_tag :search, params[:search] , class: 'form-control', 'placeholder': 'Add Member'
+									=submit_tag 'search' , name: nil , class: 'btn'
+						.live_search_results.white
+							- if @amitian.count > 0
+								- @amitian.each do |amitian|	
+									.invite_link{'data-invite-link-id': "#{amitian.id}", 'data-club-id': "#{@club.id}"}	
+										= link_to amitian.fullname, amitian
+										- if @club.requested?(amitian)
+											member
+										- elsif @club.pending?(amitian) && amitian != current_amitian
+											Sent 
+										-else
+											#send_invite_btn
+												%p.btn.btn-warning{'id': "invite_btn_#{amitian.id}"}  Invite
+			#club_events.white
+				.club_head
+					Events
+					.right
+						- if current_amitian == @club.amitian
+							%li{'data-target':'#events_create' , 'data-toggle':'modal'}
+								%a.modallink.grey  create new 
+				.active_events.cmnt_dp
+					=image_tag 'calendar.png'
+					No Active Events		
+
+		#club_confessions_div.col-sm-6.col-xs-12
+			#club_theme.shadow
+				- if !@club.club_cover? 
+					- if @club.amitian == current_amitian
+						.upload_div
+							.upload_btn.btn 
+								=link_to 'Upload Picture as Theme' 
+					-else
+						.upload_div
+				-else
+					= image_tag @club.club_cover 
+			#profile_navbar.navbar.navbar-default.shadow.col
+				#nav2.container-fluid
+					#nav_header.navbar-header
+						%button.navbar-toggle.collapsed{'data-toggle':'collapse','data-target':'#show_collapse','aria-expanded':'false'}
+							%span.icon-bar
+							%span.icon-bar
+							%span.icon-bar
+					#show_collapse.collapse.navbar-collapse.navbar-default.col
+						%ul.nav.navbar-nav.col.text-center
+							%li= link_to 'Created By: '+@club.amitian.fullname.to_s , @club.amitian
+							%li=link_to pluralize(@member.count,"Member") , @club
+							%li= link_to 'Photos'
+							%li= link_to 'Events'
+							
+			#club_form_div.white.shadow
+				-if @member.include?(current_amitian) 
+					#club_input_div.clearfix
+						=form_for @confession , html: {multipart: true}  do |f|
+							= hidden_field_tag :club_id, @club.id
+							#input
+								=f.text_area :content , require: true, placeholder: "What's new in Club !!" , class: 'form-control' , 'id':'contentbox'
+							=f.file_field :clubpost_image , class: 'form-control-file confession_file_image'
+							.confession_img_preview
+								=image_tag @confession.clubpost_image , class:'thumbnail' 
+							
+							=f.submit 'Post' , class: 'btn btn-primary right'
+				-else
+					.alert.alert-danger
+						You are not the member of this group, Ask to Join the group
+						%br
+						#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"} Ask
+								
+
+			#confession_details
+				-if @member.include?(current_amitian)
+					-@posts.each do |c|
+						=render 'clubposts/club_posts' , c: c
+
+
+		= render 'confessions/index_right_confession_div'
+= render 'modals/events_create'
+	

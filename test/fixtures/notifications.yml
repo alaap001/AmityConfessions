@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amitian: one
+  notified_by: one
+  confession: one
+  notice_type: MyString
+  identifier: 1
+  read: false
+
+two:
+  amitian: two
+  notified_by: two
+  confession: two
+  notice_type: MyString
+  identifier: 1
+  read: false

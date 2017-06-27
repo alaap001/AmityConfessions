@@ -1,0 +1,7 @@
+<%if amitian_signed_in?%>
+
+<%= form_for(current_amitian.active_relationships.find_by(followed_id: @amitian.id), remote: true,
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Unfollow", class: "btn btn-danger form-control" %>
+<% end %>
+<%end %>

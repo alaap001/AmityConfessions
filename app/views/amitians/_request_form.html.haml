@@ -1,0 +1,12 @@
+- current_amitian.requested_friendships.each do |request|
+	.REQUEST_DIV 
+		=image_tag (request.profilepic) , class:'pic shadow'
+		= link_to request.fullname+' has poked you' , request , 'style':'font-weight: 800;'
+		.text-center
+			= link_to "Poke Back",  friendship_path(id: request.id), method: "put" , 'id':'accreq' , class: 'btn btn-default'
+			= link_to "Reject", friendship_path(id: request.id), method: :delete, 'id':'delreq' , class: 'btn btn-warning'
+		.divider
+.REQUEST_DIV
+	- if current_amitian.requested_friendships.count == 0
+		.alert.alert-info
+			You don't have any Pokes

@@ -1,0 +1,148 @@
+#index_main_div.container-fluid
+	#index_show_div.row
+		#index_user_detail.col-md-3.col-sm-3.col-xs-12		
+			.shadow
+				#index_profile.white
+					#profile_image.inactiveLink
+						- if !current_amitian.profilepic?
+							-if current_amitian.gender == 'Male'
+								=image_tag '93.svg',class:'thumbnail'
+							-else 
+								=image_tag 'manager_photo.svg' , class:'thumbnail'
+						-else
+							=link_to image_tag(current_amitian.profilepic), current_amitian , class: 'thumbnail'
+
+					#profile_username	
+						%h4=link_to current_amitian.fullname , current_amitian , class: 'h3'
+						%em{'class':'grey nick'}= '# '+current_amitian.nickname
+				#tweet_details
+					%ul
+						%li{'class':'grey'}
+							Confessions
+							%br
+							=link_to current_amitian.confessions.count
+						%li{'class':'grey'}
+							Followers
+							%br
+							=link_to current_amitian.followers.count
+						%li{'class':'grey'}
+							Following
+							%br
+							=link_to current_amitian.following.count
+			#index_user_suggestion.white.shadow
+				.panel.panel-primary
+					.panel-heading
+						.panel-title
+							What's new ?
+							%small.right Explore
+					.panel-body
+						-@suggetions.each do |sug|
+							#single_suggestion
+								=image_tag sug.profilepic
+								=link_to sug.fullname , sug
+								%br
+						new joins
+						%br
+						new clubs
+						%br
+						new events 
+						%br
+						new pages
+			
+			#create_footer.white.shadow.text-center
+				%p{'style':'font-weight:800; font-size: 17px;'} Create
+				.footer.navbar-default
+					#create_link
+						%li{'data-target':'#clubs_create' , 'data-toggle':'modal'}
+							%a.modallink.grey  Club	
+						%li{'data-target':'#events_create_amitian' , 'data-toggle':'modal'}
+							%a.modallink.grey Event
+						%li{'data-target':'#aboutmodal' , 'data-toggle':'modal'}
+							%a.modallink.grey Page
+			#index_footer.white.shadow
+				%footer.footer
+					#navlink.navbar.navbar-default
+						%li=link_to 'Home' , confessions_path
+						%li{'data-target':'#aboutmodal' , 'data-toggle':'modal'}
+							%a.modallink About 
+						%li{'data-target':'#feedbackmodal' , 'data-toggle':'modal'}
+							%a.modallink Feedback
+						%li{'data-target':'#helpmodal' , 'data-toggle':'modal'}
+							%a.modallink Help
+						%li{'data-target':'#tncmodal' , 'data-toggle':'modal'}
+							%a.modallink Terms and conditions
+						%li{'data-target':'#jobmodal' , 'data-toggle':'modal'}
+							%a.modallink Get a job
+						%li{'data-target':'#adsmodal' , 'data-toggle':'modal'}
+							%a.modallink Ads
+						%li=link_to 'CEO @AlaapDhall' , 'https://www.alaapdhall.in' , 'target':'_blank'
+					
+		#index_confessions.col-md-6.col-sm-6.col-xs-12
+			- if current_amitian.sign_in_count < 3
+				#info.alert.alert-info.alert-dismissible.text-center
+					%p 
+						It looks like you just signed up, let me show you how to use Amity humor..
+					.btn{'data-target':'#aboutmodal' , 'data-toggle':'modal'}
+						%a.modallink Yes, Show me 
+			#index_status_div.white.shadow
+				#status_image_div
+					- if !current_amitian.profilepic?
+						-if current_amitian.gender == 'Male'
+							=image_tag ('93.svg')
+						-else 
+							=image_tag('manager_photo.svg')
+					-else
+						=link_to image_tag(current_amitian.profilepic), current_amitian
+
+				#status_form_div
+					=render 'confessions_form'
+				%br
+			#info.alert.alert-danger.alert-dismissible.text-center
+				=flash[:alert] = 'Your Department seems new, you will receive feeds from "anonymous" and people from your Department, ask your friends to join. You can also Follow people from other Department to receive their Feeds. :)'
+			.scrollmenu.shadow
+				.top_sug_layer.clearfix
+					.left.grey{'style':'font-size:19px;'} SUGGESTED
+					%span.glyphicon.glyphicon-remove.sugremove.right
+				.sugdiv.clearfix
+					-@suggetions2.each do |sug|
+						- if !current_amitian.following?(sug)
+							#single_suggestion2.shadow
+								%table
+									%tbody
+										%tr
+											%td
+												.text-center=image_tag sug.profilepic , class: 'img-rounded'
+										%tr
+											%td{'style':'height:10px;'}
+										%tr
+											%td
+												.text-center=link_to sug.fullname , sug , 'style':' font-weight: 600;'
+										%tr
+											%td
+												%small.grey
+													.text-center= '#'+sug.nickname
+										%tr
+											%td{'style':'height:10px;'}
+
+										%tr
+											%td
+												=render 'follow_form' , sug: sug
+
+			
+						
+			#confessions
+				-@confessions.each do |c|
+					=render 'confessions' , c: c
+		= render 'index_right_confession_div'
+			
+#infinitescrolling.text-center
+	=will_paginate	@confessions		
+=render 'modals/feedback'
+=render 'modals/club_create'
+= render 'modals/events_create_amitian'
+
+:javascript
+	var consize = #{@tconfessions}
+	if (consize < 60){
+		document.getElementById('info').style.display = 'block';
+	}

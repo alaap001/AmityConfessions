@@ -1,0 +1,18 @@
+#index_main_div
+	-if @interest == 'Male'
+		.container-fluid
+			-@male.each do |male|
+				= render 'male' , male: male
+		#infinitescrolling.text-center
+			=will_paginate @male						
+
+						
+	-elsif @interest == 'Female'
+		#feeling_append_female.container-fluid
+			%ul{ 'id':'feelings_ul'}
+				-@female.each do |female|
+					= render 'female' , female: female
+		#infinitescrolling.text-center
+			=will_paginate @female
+		
+													

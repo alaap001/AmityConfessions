@@ -1,0 +1,13 @@
+%li
+	.panel.panel-default{'data-conversation-id': c.id }
+		.panel-heading
+			=link_to c.opposed_amitian(amitian).fullname ,'',class: 'toggle-window'
+			=link_to 'x' , close_conversation_path(c) , class: 'btn btn-default btn-xs pull-right' , remote: true , method: :post
+		.panel-body{'style':{'display':'none;'}}
+			.messages-list
+				%ul
+					=render 'conversations/conversation_content' , messages: c.messages , amitian: amitian
+			=form_for [c,c.messages.new] , remote: true do |f|
+				= f.hidden_field :amitian_id , value: amitian.id
+				= f.text_area :body , class: 'form-control'
+				=f.submit 'send' , class: 'btn btn-success'

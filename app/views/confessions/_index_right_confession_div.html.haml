@@ -1,0 +1,115 @@
+#index_top_confession_div.col-md-3.col-sm-3.hidden-xs
+	#topconfession.white.shadow
+		.panel.panel-primary
+			.panel-heading
+				.panel-title
+					Top Confessions
+			.panel-body
+				#top_image.thumbnail
+					-if @topstory.confessionimage?
+						=link_to image_tag(@topstory.confessionimage),@topstory
+					-else
+						=link_to image_tag('confessions.jpg'),@topstory
+				#content
+					%p= @topstory.confession[0..100]
+	#find_match.find_match.white.shadow
+		#match_header
+			.panel.panel-primary
+				.panel-heading
+					.panel-title.left Find your Match
+					.right{'style': 'position: relative; right: 10px;'}=link_to 'more' , feeling_index_path , 'style':'color:#fff;'
+					%br
+					
+				.panel-body
+					-if @interest == 'Male'
+						-@male.each do |male|
+							#match.inline-block
+								%span.glyphicon.glyphicon-heart{'style': 'color: pink; margin-right: 5px;'}
+								=image_tag male.profilepic ,class: 'userdp'
+								=link_to male.fullname , male 
+							
+							
+					-elsif @interest == 'Female'
+						-@female.each do |female|
+							#match.inline-block
+								%span.glyphicon.glyphicon-heart{'style': 'color: pink; margin-right: 5px;'}
+								=image_tag female.profilepic ,class: 'userdp'
+								=link_to female.fullname ,female
+							
+					
+	#mini_chat_box.shadow
+		.panel.panel-primary
+			.panel-heading
+				.panel-title
+					Chat with
+			.panel-body
+				-if @friends.count == 0
+					.alert-info.alert
+						You don't have any connections,
+						%br
+						=link_to 'Make Connections' , feeling_index_path
+				-@friends.each do |f|
+					#mini_chat_list
+						= image_tag f.profilepic , class: 'userdp'
+						=link_to f.fullname , chatarea_index_path
+						-if f.online?
+							.online.right
+						-else
+							.offline.right
+	#clubnames.white.shadow.text-center
+		.panel.panel-primary
+			.panel-heading
+				.panel-title
+					My Clubs
+			.panel-body
+				#club_names
+					-if @myclubs.count > 0
+						-current_amitian.clubs.each do |club|
+							#single_clubname.cmnt_dp.clearfix
+								.left
+									=image_tag club.club_themepic , class: ' img-rounded'
+									=link_to club.clubname , club 
+								%small.right.member
+									=link_to 'owner' 
+						-current_amitian.clubmembers.each do |club|
+							#single_clubname.cmnt_dp.clearfix
+								.left
+									=image_tag club.club.club_themepic , class: ' img-rounded'
+									=link_to club.club.clubname , club.club
+								%small.right.member
+									=link_to 'member' 
+
+					-else
+						.alert.alert-info
+							You don't have any clubs
+
+
+	#eventnames.white.shadow.text-center
+		.panel.panel-primary
+			.panel-heading
+				.panel-title
+					=image_tag 'calendar.png' , 'style':'width:25px; height: 25px; margin-right:6px;'
+					Active Events
+
+			.panel-body
+				#club_names
+					- if current_amitian.events.count > 0		
+						- current_amitian.events.each do |event|
+							#single_clubname.cmnt_dp.clearfix
+								.left
+									=image_tag event.event_themepic , class: ' img-rounded'	
+									=link_to event.eventtheme , event 
+								%small.right.member
+									=link_to 'member'
+								%small.right
+									#eventdata{'data-event': "#{event.start}"}
+									#countDownTimer
+					-else
+						.alert.alert-info
+							No recent Events 
+				
+			
+	.divi
+	#copyright.white.shadow{'style': 'padding: 13px; margin-bottom: 12px;'}
+		.grey &copy; 2017 Amity Humor
+	

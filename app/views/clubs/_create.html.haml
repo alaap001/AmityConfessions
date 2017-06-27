@@ -1,0 +1,27 @@
+#club_create_form
+	= form_for @club do |f|
+		.form_group
+			= f.label :ClubName
+			= f.text_field :clubname
+		.form_group
+			=f.label :ThemeOfClub
+			=f.text_field :club_theme
+		.form_group
+			=f.label :YourNiche
+			=f.text_field :niche
+		.form_group
+			=f.label :website
+			= f.text_field :website
+		.form_group
+			=f.label :description
+			= f.text_area :description
+		.form_group
+			=f.label :club_themepic
+			= f.file_field :club_themepic
+		.form_group
+			=f.label :club_cover
+			=f.file_field :club_cover
+		.form_group
+			= f.submit
+
+	

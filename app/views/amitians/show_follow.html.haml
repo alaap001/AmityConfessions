@@ -1,0 +1,6 @@
+#index_main_div
+	-if @amitians.any?
+		- @amitians.each do |follow|
+			=follow.fullname
+			%br
+		

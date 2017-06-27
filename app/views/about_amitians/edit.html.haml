@@ -1,0 +1,65 @@
+#index_main_div.container
+	.container
+		.row
+			.col-sm-2
+				-if !current_amitian.profilepic?
+					-if current_amitian.gender == 'Male'
+						=image_tag '93.svg' , class:'about_image img-circle'
+					-else 
+						=image_tag 'manager_photo.svg' , class:'about_image img-circle'
+				-else
+					= image_tag current_amitian.profilepic , class:' about_image img-circle'
+			.col-sm-10
+				%h2.text-center
+					-if !current_amitian.alumni
+						Hello 
+						= current_amitian.fullname
+						, Help us know you better.
+						we can find a better match for you this way.. Thank you :)
+					-else
+						.h3
+							Hello 
+							= current_amitian.fullname
+							, we saw that you are an Alumni and
+							we really appreciate Alumnis here at AmityHumor.
+							Please fill out some information so that we can know you better,
+							we can find a better match for you this way.. Thank you :)
+
+		%br
+		%br
+		.about_form
+			= form_for @about_amitian do |f|
+				.form-gorup
+					=f.label :date_of_birth
+					=f.date_field :dob , class: 'form-control'
+				.form-group
+				.form-group
+					=f.label :interested_in
+					.form-check
+						=f.radio_button :interest , 'Male' , class: 'form-check-input'
+						=f.label :Male , class: 'form-check-label'
+					.form-check
+						=f.radio_button :interest , 'Female', class: 'form-check-input'
+						=f.label :Female , class: 'form-check-label'
+				.form-group
+					=f.label :Course
+					=f.text_field :course , class: 'form-control'	
+				.form-group
+					=f.label :Graduation_year
+					=f.number_field :graduation_year , class: 'form-control'			
+				.form-group
+					=f.label :bio
+					=f.text_area :bio , class: 'form-control'
+				-if current_amitian.alumni
+					.form-group
+						=f.label :Like_To_Share_Your_Memories_Of_College?
+						=f.text_area :memories , class: 'form-control'
+				.form-group
+					=f.label :catch_phrase
+					=f.text_field :catch_phrase, class: 'form-control' , placeholder: 'Your catchy attractive cheezy line'
+				.form-group
+					=f.label :relationship_status
+					=f.select :relationship_status, options_for_select([['Single','single'],['committed','committed'],['Not interested','Not interested'], ['Hungry' , 'Hungry'] ,['Interested','Interested'],['Married','Married'],['Broken','Broken'] , ['In Love','In Love']]) ,{'class':'form-control'}
+				=f.submit 'Edit Your Details' , class: 'btn btn-default'
+%footer.footer
+	= render 'home/footer'

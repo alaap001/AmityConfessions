@@ -1,0 +1,32 @@
+#confessions_div.white
+	#remove.right
+		-if current_amitian == c.amitian
+			.dropdown
+				%button{'type':'button', 'role':'button' , 'class':"btn btn-default btn-xs dropdown-toggle", 'data-toggle':"dropdown" , 'aria-haspopup':"true" , 'aria-expanded':"false"}
+					%span.caret
+				%ul.dropdown-menu
+					%li= link_to 'Edit' 
+					%li=link_to 'Delete' , [c] ,remote: true, method: :delete  
+					
+					 
+	#confessor_name
+		.userdp
+			=link_to image_tag(c.event.event_themepic), c.event 
+		.namehead.clearfix
+			.username.left
+				=link_to c.event.eventtheme  
+				%p= time_ago_in_words(c.created_at)+' ago'
+			.right
+				= link_to 'Posted_by: '+c.amitian.fullname , c.amitian , class: 'grey'
+
+	.post_image{'id': "event_#{c.id}" , 'data-post-id': "#{c.id}"}
+		#confession_content
+			%p= auto_link(simple_format(c.content[0..350]))
+			-if c.content.size > 350
+				= link_to 'load full confession' , c
+		=image_tag(c.event_post_image,{'class':'thumbnail'}) if c.event_post_image?
+		 
+		%br
+	.index_comments{id: "comments_#{c.id}"}
+		=render 'eventposts/show_comments' , c: c
+		

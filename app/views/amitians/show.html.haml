@@ -1,0 +1,98 @@
+#index_main_div_amitians
+	=render 'show_profile_head'
+	#show_rest_row
+		#about_profile.col-md-4.col-sm-4.col-xs-12
+			#show_user_detail.shadow
+				%h4.h3
+					=@amitian.fullname
+					%em
+						%small='( #'+@amitian.nickname+' )'
+				%b Campus: 
+				= @amitian.campus
+				- if @amitian.alumni
+					%br
+					%b Memories of college: 
+					=@amitian.about_amitian.memories
+
+				%br
+				%b Last Seen: 
+				%em=(@amitian.last_sign_in_at).to_date.to_s
+				%br
+				%b= @amitian.institute
+				%br
+				%p
+					%b Gender :
+					= @amitian.gender
+					%br
+					%b Interest
+					= @amitian.about_amitian.interest if @amitian.about_amitian != nil
+
+				%span.glyphicon.glyphicon-calendar
+				='Joined on: '+(@amitian.created_at).to_date.to_s
+				=link_to 'more' , about_amitian_path , class: 'right'
+				#followdiv.text-center		
+					= render 'follow_form' if amitian_signed_in?
+				#friendship.text-center
+					= render 'friendship_form' if amitian_signed_in? 
+				#message_form.text-center
+					= render 'message_form' if amitian_signed_in? && @amitian != current_amitian
+
+			#gallery_div
+				-if @amitian == current_amitian && current_amitian.gallery == nil
+					#galleryedit.flex{'data-target':'#gallery_create_modal' , 'data-toggle':'modal'}
+						%a.modallink Create your gallery
+				- if @amitian == current_amitian && current_amitian.gallery != nil
+					#galleryedit.flex
+						= link_to 'Edit your gallery' , edit_gallery_path(current_amitian.gallery) 
+				#inner_gallery_border.white.shadow
+					#galleryone.innergal.g1.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g1, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+					#gallerytwo.innergal.g2.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g2, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+					#gallerythree.innergal.g3.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g3, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+					#galleryfour.innergal.g4.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g4, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+					#galleryfive.innergal.g5.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g5, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+					#gallerysix.innergal.g6.shadow
+						- if @amitian.gallery != nil
+							= image_tag @amitian.gallery.g6, 'class':'thumbnail'
+						-elsif (@amitian.gender == 'Male')
+							= image_tag ('93.svg'), 'class':'thumbnail' 
+						-else
+							= image_tag ('manager_photo.svg'), 'class':'thumbnail' 
+			%hr
+		#confession_details.col-md-6.col-sm-6.col-xs-12
+			-@confessions.each do |c|
+				=render 'confessions/confessions' , c: c
+			#infinitescrolling.text-center
+				=will_paginate	@confessions		
+
+
+=render 'modals/gallery_create_modal'

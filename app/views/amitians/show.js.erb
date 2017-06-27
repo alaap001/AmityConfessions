@@ -1,0 +1,11 @@
+<% if @confessions %>
+<% @confessions.each do |c| %>
+$('#confession_details').append("<%= j render 'confessions/confessions' , c: c %>");
+$('.pagination').replaceWith("<%= j will_paginate @confessions %>");
+ <% end %>
+<% end %>
+
+<% if !@confessions.next_page %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

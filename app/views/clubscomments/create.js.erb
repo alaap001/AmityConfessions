@@ -1,0 +1,2 @@
+$('#comments_<%= @post.id %>').html(" <%= j render 'clubposts/show_comments', c: @post %>")
+$('#comment_content_<%= @post.id %>').val('')

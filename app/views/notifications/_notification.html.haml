@@ -1,0 +1,28 @@
+%li.notif_lnk
+
+	-if notification.notice_type != 'invites'
+		-if notification.notified_by.profilepic? 
+			=image_tag((notification.notified_by.profilepic),class:'pic shadow')
+	- if notification.notice_type  == 'like'
+		= link_to "#{notification.notified_by.fullname} has #{notification.notice_type}d your confession '#{notification.confession.confession[0..30]}'", link_through_path(notification) 
+	-elsif notification.notice_type == 'dislike'
+		= link_to "#{notification.notified_by.fullname} has #{notification.notice_type}d your confession '#{notification.confession.confession[0..30]}'", link_through_path(notification) 
+	-elsif notification.notice_type == 'comment'
+		= link_to "#{notification.notified_by.fullname} has #{notification.notice_type}ed on your confession '#{notification.confession.confession[0..30]}'", link_through_path(notification) 
+	-elsif notification.notice_type == 'follow'
+		= link_to "#{notification.notified_by.fullname} has started #{notification.notice_type}ing you", link_through_path(notification) 
+	-elsif notification.notice_type == "ask_invite"
+		=link_to "#{notification.notified_by.fullname} has asked to join your club #{notification.club.clubname}" , link_through_path(notification) 
+	-elsif notification.notice_type == 'invites'
+		.REQUEST_DIV 
+			=image_tag notification.club.club_themepic , class:'pic shadow'
+			= link_to 'You are invited to '+notification.club.clubname+' by '+notification.club.amitian.fullname , notification.club
+			.text-center
+				= link_to "Accept",  clubmember_path(id: notification.club.id,notif_id: notification.id), method: "put" , 'id': "accreq" , class: 'btn btn-default'
+				= link_to "Reject", clubmember_path(id: notification.club.id,notif_id: notification.id), method: :delete, 'id':'delreq' , class: 'btn btn-warning'
+	
+
+
+
+
+	

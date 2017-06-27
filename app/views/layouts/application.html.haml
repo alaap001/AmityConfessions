@@ -1,0 +1,90 @@
+!!!
+%html
+	%head
+		%title
+			Amity Humor
+		= csrf_meta_tags
+		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+		= stylesheet_link_tag    'jquery.countdown'
+		= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+		
+	%body
+		#main_container
+			#main_container_2
+				#nav.navbar.navbar-inverse.navmain
+					#nav2.container-fluid
+						#nav_header.navbar-header
+							%button.navbar-toggle.collapsed{'data-toggle':'collapse','data-target':'#collapse','aria-expanded':'false'}
+								%span.icon-bar
+								%span.icon-bar
+								%span.icon-bar
+							=link_to 'AMITY HUMOR',root_path,class: 'navbar-brand logoh'
+						#collapse.collapse.navbar-collapse.navbar-inverse
+							%ul.nav.navbar-nav.navbar-right
+								-if amitian_signed_in?
+									%li.dropdown.notification-dropdown
+										.glyphicon.glyphicon-inbox.dropdown-toggle{'data-toggle':'dropdown','role':'button','aria-haspopup':'true','aria-expanded':'true','id':'Notificationdropdown'}									
+											-if current_amitian.notifications.where(read: false).count > 0 
+												%span.badge.notif
+													=current_amitian.notifications.where(read: false).count
+											-else
+												%span.notif '
+
+										%ul.dropdown-menu{ 'aria-labelledby': 'Notificationdropdown' , 'id': 'notif_dropdown' }
+											%li
+												= render 'notifications/notification_dropdown'
+											%li.text-center
+												-if  current_amitian.notifications.where(read: false).count > 10
+													%p
+														You have 
+														= current_amitian.notifications.where(read: false).count-7
+														more notifications
+											%li.divider{ role: 'separator' }
+												%li.text-center= link_to 'View All', notifications_path
+									%li.dropdown.notification-dropdown
+										.glyphicon.glyphicon-heart.dropdown-toggle{'data-toggle':'dropdown','role':'button','aria-haspopup':'true','aria-expanded':'true','id':'Friendshipdropdown'}
+											-if current_amitian.requested_friendships.count > 0 
+												%span.badge.notif
+													=current_amitian.requested_friendships.count
+											-else
+												%span.notif '
+										%ul.dropdown-menu{ 'aria-labelledby': 'Friendshipdropdown' }
+											%li
+												= render 'amitians/request_form'
+									%li.dropdown.notification-dropdown
+										.glyphicon.glyphicon-comment.dropdown-toggle{'data-toggle':'dropdown','role':'button','aria-haspopup':'true','aria-expanded':'true','id':''}
+											%span.badge.notif 0
+										%ul.dropdown-menu{ 'aria-labelledby': '' }
+											%li
+												= render 'amitians/request_form'
+									%li=link_to 'Feeling Lucky ?' , feeling_index_path
+								%li=link_to 'Home', root_path
+								-if amitian_signed_in?														
+									%li.dropdown
+										%a.dropdown-toggle{'data-toggle':'dropdown','role':'button','aria-haspopup':'true','aria-expanded':'false'}
+											My Profile
+											%span.caret
+										%ul.dropdown-menu
+											%li= link_to current_amitian.fullname , current_amitian
+											%li= link_to 'My Hotlists' ,hotlisting_amitian_path(current_amitian)
+											%li= link_to 'Settings' , edit_amitian_registration_path(current_amitian)
+											%li=link_to 'Sign Out', destroy_amitian_session_path, method: :delete , data: {confirm: 'Are you sure ?'}
+								-else
+									%li=link_to 'Log In', amitian_session_path 
+									%li= link_to 'Sign Up', new_amitian_registration_path
+							#searchform
+								.navbar-form.navbar-left{'role':'search'}
+									=form_tag amitians_path , method: :get do 
+										.form-group
+											=text_field_tag :amitian_search, params[:amitian_search]  , class: 'form-control', 'placeholder': 'Search'
+											=submit_tag 'search' , name: nil , class: 'btn'
+			#contentofmain
+				.notice
+					=notice
+				=yield
+				=render 'modals/aboutmodal'
+				=render 'modals/ads'
+				=render 'modals/tnc'				
+				=render 'modals/help'
+				=render 'modals/getjob'
+			

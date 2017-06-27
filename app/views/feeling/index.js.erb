@@ -1,0 +1,25 @@
+<% if  @interest == 'Male' %>
+	<% if @male %>
+		<% @male.each do |male|%>
+		$('#feeling_append_female').append("<%= j render 'male' , male: male  %>");
+		$('.pagination').replaceWith("<%= j will_paginate @male %>");
+		<% end %>
+	<% if !@male.next_page %>
+	  $('.pagination').remove();
+	<% end %>
+	<% end %>
+
+<% elsif @interest == 'Female' %>
+
+	<% if @female %>
+		<% @female.each do |female| %>
+		$('#feeling_append_female').append("<%= j render 'female' , female: female  %>");
+		$('.pagination').replaceWith("<%= j will_paginate @female %>");
+		 <% end %>
+
+	<% if !@female.next_page %>
+	  $('.pagination').remove();
+	<% end %>
+	<% end %>
+
+<% end %>

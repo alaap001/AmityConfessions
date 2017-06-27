@@ -1,0 +1,19 @@
+#index_main_div
+	.container
+		.row
+			#index_status_div.col-sm-8.col-xs-12.white.shadow{'style':'margin-top: 30px;'}
+				#status_image_div_edit.col-sm-2
+					=image_tag current_amitian.profilepic , class: 'img-thumbnail'	
+				#form_status.col-sm-10
+					#input_div
+						=form_for @confession  do |f|
+							=f.text_area :confession , require: true, placeholder: 'Confess !!' , class: 'form-control' , 'style':'height: 75px; width: 100%;'
+							%br
+							#confession_image.edit_confession_image
+								=image_tag @confession.confessionimage,class:'thumbnail inactiveLink'
+
+
+							=f.file_field :confessionimage , class: 'form-control-file edit_confession_image_file'
+							= f.label :Remove_Image
+							= f.check_box :remove_confessionimage			
+							=f.submit 'Confirm Edit' , class: 'btn btn-primary'

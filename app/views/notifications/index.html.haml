@@ -1,0 +1,15 @@
+#index_main_div
+	.container-fluid
+		.row
+			.col-sm-6.col-xs-12
+				%h1.text-center{'style':'font-weight: 700;'}
+					You have
+					=pluralize(@notifications.count,'Notification')
+				%hr
+				%ul
+					#notification
+						= render @notifications
+			.col-sm-3
+			= render 'confessions/index_right_confession_div'
+#infinitescrolling.text-center
+	=will_paginate	@notifications

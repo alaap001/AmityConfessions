@@ -1,0 +1,6 @@
+
+=render  partial: "notifications/notification", collection: current_amitian.notifications.where(read: false).order('created_at DESC').limit(7)	
+.REQUEST_DIV
+	-if current_amitian.notifications.where(read: false).count == 0 
+		.alert.alert-info
+			You don't have any notifications

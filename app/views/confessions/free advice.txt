@@ -1,0 +1,30 @@
+alumini must have a different ui
+
+while signing up ask if you are an alumini
+if checked... 
+set alumini boolean to true in dtabase... make default as false
+in index page ... write everywhere like in about amitians that we appriciate our aluminis to join amity humor please fill out some information ... and modify about_amitians_form to display one or two more options like ask their memories from college
+
+
+Create a hotlist to add people into, so that you can check them out later on 
+how to create the hotlist..
+ bad idea... table with one column ??
+ no
+ .. create an array...
+ every amitian.. has his own hotlist..
+ so it has to be related to him... 
+ 
+ Create an Event ... any event inside amity can be publish here inside Amity humor...@
+
+ inside clubs 
+ show confessions to the people whos request are pending
+ and when accepted allow users to post stuff.
+
+ non-invited people cannot see anything but the about section and can Ask to join the group
+
+ I need help finding some data
+Market share of Android antivirus companies in India
+Like how many Android using people in India use bitdefender antivirus, use Norton, etc
+ For Android only
+
+ kashish grover0

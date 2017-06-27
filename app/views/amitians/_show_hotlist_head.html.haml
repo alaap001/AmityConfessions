@@ -1,0 +1,15 @@
+.container
+	.row
+		.col-sm-2.hidden-xs.col-sm-offset-1
+			-if !current_amitian.profilepic?
+				-if current_amitian.gender == 'Male'
+					=image_tag '93.svg' , class:'about_image img-circle'
+				-else 
+					=image_tag 'manager_photo.svg' , class:'about_image img-circle'
+			-else
+				= image_tag current_amitian.profilepic , class:' about_image img-circle shadow'
+		.col-sm-7
+			.lead.h1.text-center
+				You have
+				=current_amitian.hotlisting.size
+				Amitians in your list

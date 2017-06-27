@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amitian_id: MyString
+  ,: MyString
+  friend_id: 1
+  ,: MyString
+  accepted: false
+
+two:
+  amitian_id: MyString
+  ,: MyString
+  friend_id: 1
+  ,: MyString
+  accepted: false

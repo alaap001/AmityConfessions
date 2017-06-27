@@ -1,0 +1,61 @@
+// Place all the styles related to the amitians controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// show
+
+#show_amitian_cover{
+	width: 100%;
+	height: 340px;
+}
+#show_amitian_cover img{
+	height: 100%;
+	width: 100%;
+}
+
+#amitian_dp{
+	z-index: 9;
+	height: 200px;
+	width: 200px;
+	position: absolute;
+	top: -150px;
+	margin-left:50px ; 
+}
+
+@media only screen and (max-width: 408px) {
+
+	#amitian_dp{	
+		z-index: 9;
+		height: 145px;
+		width: 145px;
+		position: absolute;
+		top: -94px;
+		margin-left:20px ; 
+
+	}
+
+}
+
+
+#amitian_details{
+	position: relative;
+}
+
+#amitian_dp img{
+height: 100%;
+width: 100%;
+}
+
+#show_user_detail{
+	margin-left: 0px;
+	padding: 7px;
+	background-color: #e0e0e0;
+}
+.navbar{
+height: 60px;
+}
+.footer li{
+	display: inline-block;
+	margin: 5px;
+	list-style: none;
+}

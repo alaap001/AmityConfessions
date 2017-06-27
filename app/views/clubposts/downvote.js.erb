@@ -1,0 +1,3 @@
+
+$('#like_<%=@posts.id %>').html('<%= j render "clubposts/like_unlike" , c: @posts  %>');
+$('#unlike_link_<%= @posts.id %>').css('color','#42A5F5');

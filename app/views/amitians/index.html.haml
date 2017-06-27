@@ -1,0 +1,37 @@
+#index_main_div.container-fluid
+	.container-fluid
+		#searchdiv.col-sm-9.col-xs-12
+			.lead.text-center
+				= @amit.count 
+				Results match your search
+			-@amit.each do |amit|
+				-if @amit.any?
+					#searchresult
+						%table{'style':'width: 100%;'}
+							%tr
+								%td.searchimage
+									- if !amit.profilepic?
+										-if amit.gender == 'Male'
+											=image_tag '93.svg',class:'friendimg'
+										-else 
+											=image_tag 'manager_photo.svg' , class:'friendimg'
+									-else
+										=image_tag amit.profilepic , class: ' friendimg'
+								%td{'style':'width:10px;'}
+
+								%td 
+									%table
+										%tr
+											%td
+												.h3=link_to amit.fullname , amit
+										%tr
+											%td{'style':'height: 10px;'}
+												
+
+								
+				-else
+					No user found
+											
+		= render 'confessions/index_right_confession_div'
+%footer.footer
+	= render 'home/footer'

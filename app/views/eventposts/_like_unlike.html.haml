@@ -1,0 +1,5 @@
+=link_to c.get_upvotes.size ,like_eventpost_path(c) , method: :get ,remote: true, class: ' glyphicon glyphicon-thumbs-up' , 'id': "like_link_#{c.id}"
+=link_to c.get_downvotes.size ,dislike_eventpost_path(c) , method: :get,remote: true,class: ' glyphicon glyphicon-thumbs-down' , 'id': "unlike_link_#{c.id}" , 'title': "#{display_dislikes c}"
+
+.likes{id: "likes_#{c.id}"}
+  = display_likes c

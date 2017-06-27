@@ -1,0 +1,18 @@
+#feedbackmodal.modal.fade.m{'tabindex':-1 , 'role':'dialog','aria-labelledby':'aboutmodal'}
+	.modal-dialog.modal-lg{'role':'document'}
+		.modal-content
+			%h1 Feedback Form / Bug Reports
+			%br
+			%br
+			%br
+			=form_for @feed do |f|
+				.form-group
+					=f.label :name
+					=f.text_field :name , class: 'form-control disabled' , 'placeholder': "#{current_amitian.fullname}"
+				.form-group
+					=f.label :subject
+					=f.text_field :title , class: 'form-control'
+				.form-group
+					=f.label :content
+					=f.text_area :content , class: 'form-control'
+				=f.submit 'Leave Feedback', class: 'btn btn-default'
