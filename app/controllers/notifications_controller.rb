@@ -30,8 +30,6 @@ def link_through
   @notification.update read: true
   if @notification.notice_type == 'follow' 
   		redirect_to @notification.notified_by
-  elsif @notification.notice_type == 'ask_invite'
-      redirect_to @notification.club
 	else
 	  redirect_to confession_path @notification.confession
 	end

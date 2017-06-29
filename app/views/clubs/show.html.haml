@@ -1,6 +1,6 @@
 #index_main_div
 	#clubs_show_page
-		#club_details.col-sm-3
+		#index_user_detail.col-sm-3.col-xs-12
 			#club_themepic.text-center
 				- if !@club.club_themepic? 
 					= image_tag '93.svg' , class: 'club_themepic img-rounded'
@@ -16,23 +16,25 @@
 					%small.grey
 						( #	
 						= @club.club_theme+' )'
-
+				
 			#club_about_div
 				.grey.club_about_head About
-				.description
-					%p= @club.description
-				.website.lead
-					= auto_link(@club.website)
+				.description.shadow
+					%p= auto_link(simple_format(@club.description))
+				.lead
+					%small.website
+						Visit Us: 
+						= auto_link(@club.website)
 
-			#club_photos.row.white
+			.club_photos.row.white.shadow
 				.club_head.clearfix
 					.left{'style':'font-size: 17px;'} Photos 
 					= link_to 'See all' , '' , class: 'right grey' 
 				 
 				- @gallery.each do |post|
 					= image_tag post.clubpost_image , class: 'club_photo col-sm-6 thumbnail'
-
-			#club_members.white
+			.margin
+			#club_members.white.shadow
 				.club_head{'style':'font-size: 17px;'}
 					Members
 				 
@@ -55,27 +57,29 @@
 						.live_search_results.white
 							- if @amitian.count > 0
 								- @amitian.each do |amitian|	
-									.invite_link{'data-invite-link-id': "#{amitian.id}", 'data-club-id': "#{@club.id}"}	
-										= link_to amitian.fullname, amitian
-										- if @club.requested?(amitian)
-											member
-										- elsif @club.pending?(amitian) && amitian != current_amitian
-											Sent 
-										-else
-											#send_invite_btn
-												%p.btn.btn-warning{'id': "invite_btn_#{amitian.id}"}  Invite
-			#club_events.white
+									= render 'amitian_invite_form' , amitian: amitian , notif_id: 0
+			#club_events.white.shadow
 				.club_head
 					Events
 					.right
 						- if current_amitian == @club.amitian
 							%li{'data-target':'#events_create' , 'data-toggle':'modal'}
 								%a.modallink.grey  create new 
-				.active_events.cmnt_dp
-					=image_tag 'calendar.png'
-					No Active Events		
+				.active_events{'style':'padding:5px;'}		
+					- if @club.events.count == 0
+						.alert.alert-info
+							Organize some evnts
+							%li{'data-target':'#events_create' , 'data-toggle':'modal'}
+								%a.modallink.grey  Creant an Event Now
 
-		#club_confessions_div.col-sm-6.col-xs-12
+					- @club.events.each do |event|
+						.clubsevent.clearfix
+							=image_tag event.event_themepic , class:'userdp' if event.event_themepic?
+							=image_tag 'calendar.png' , class: 'right' , 'style':'width:25px; height:25px;'
+							=link_to event.eventtheme , event
+
+
+		#index_confessions.col-sm-6.col-xs-12
 			#club_theme.shadow
 				- if !@club.club_cover? 
 					- if @club.amitian == current_amitian
@@ -99,12 +103,14 @@
 							%li=link_to pluralize(@member.count,"Member") , @club
 							%li= link_to 'Photos'
 							%li= link_to 'Events'
-							
-			#club_form_div.white.shadow
-				-if @member.include?(current_amitian) 
+
+
+			-if @member.include?(current_amitian)				
+				#club_form_div.white.shadow			 
 					#club_input_div.clearfix
 						=form_for @confession , html: {multipart: true}  do |f|
 							= hidden_field_tag :club_id, @club.id
+
 							#input
 								=f.text_area :content , require: true, placeholder: "What's new in Club !!" , class: 'form-control' , 'id':'contentbox'
 							=f.file_field :clubpost_image , class: 'form-control-file confession_file_image'
@@ -112,11 +118,41 @@
 								=image_tag @confession.clubpost_image , class:'thumbnail' 
 							
 							=f.submit 'Post' , class: 'btn btn-primary right'
-				-else
-					.alert.alert-danger
-						You are not the member of this group, Ask to Join the group
-						%br
-						#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"} Ask
+				.margin
+				.scrollmenu.shadow
+					.top_sug_layer.clearfix
+						.left.grey{'style':'font-size:17px;'} 
+							Invite Amitians to club
+						.right
+							%span.glyphicon.glyphicon-remove.sugremove
+					.sugdiv.clearfix
+						-@suggestions.each do |sug|
+							#single_suggestion2.shadow
+								%table
+									%tbody
+										%tr
+											%td
+												.text-center=image_tag sug.profilepic , class: 'img-rounded'
+										%tr
+											%td{'style':'height:10px;'}
+										%tr
+											%td
+												.text-center=link_to sug.fullname , sug , 'style':' font-weight: 600;'
+										%tr
+											%td
+												%small.grey
+													.text-center= sug.nickname
+										%tr
+											%td{'style':'height:10px;'}
+
+										%tr
+											%td.text-center
+												=render 'amitian_invite_form' , amitian: sug, notif_id: 0
+			-else
+				.alert.alert-danger
+					You are not the member of this club, Ask to Join the club
+					%br
+					#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"} Ask
 								
 
 			#confession_details

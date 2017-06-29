@@ -6,7 +6,9 @@ def create
 if @feedback.save
 redirect_to :back
 else
+      flash[:notice] = "Error in form"
 	redirect_to :back
+
 end
 end
 private

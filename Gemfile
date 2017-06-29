@@ -49,6 +49,7 @@ gem 'time_difference'
 gem 'devise-bootstrap-views'
 gem 'mini_magick'
 gem 'whenever' , require: false
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 

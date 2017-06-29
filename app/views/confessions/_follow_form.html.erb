@@ -1,6 +1,6 @@
 <%if amitian_signed_in?%>
 <% if sug != current_amitian %>
-  <div id="follow_form_<%= sug.id %>" , data-sug-id = "<%= sug.id %>" , data-current-id = "<%= current_amitian.id %>">
+  <div class="follow_form_<%= sug.id %>" , data-sug-id = "<%= sug.id %>" , data-current-id = "<%= current_amitian.id %>">
     <%= render 'follow' , sug: sug %>
   </div>
 <% end %>

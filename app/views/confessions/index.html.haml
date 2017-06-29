@@ -30,25 +30,70 @@
 							%br
 							=link_to current_amitian.following.count
 			#index_user_suggestion.white.shadow
-				.panel.panel-primary
+				.panel.panel-default
 					.panel-heading
 						.panel-title
 							What's new ?
-							%small.right Explore
+							%small.right 
+								=link_to 'Explore' , explore_path
 					.panel-body
-						-@suggetions.each do |sug|
-							#single_suggestion
-								=image_tag sug.profilepic
-								=link_to sug.fullname , sug
-								%br
-						new joins
-						%br
-						new clubs
-						%br
-						new events 
-						%br
-						new pages
-			
+						.lead.grey
+							Welcome new joinies  
+						- if @newcommers.count != 0 
+							-@newcommers.each do |nc|	
+								.single_suggestion.row
+									.col-sm-6
+										= image_tag nc.profilepic
+										= link_to nc.fullname , nc
+										
+									.col-sm-4.col-sm-offset-1
+										=render 'follow_form' , sug: nc
+						-else
+							.alert.alert-info
+								%p No new amitians,
+								invite your friends to Amity humor, 
+								*use social sahre button to share to facebook n ol
+						%hr
+
+						.lead.grey
+							New Clubs for you
+						- if @newclubs.count != 0
+							- @newclubs.each do |nc|
+								.single_suggestion.row
+									.col-sm-7
+										= image_tag nc.club_themepic
+										= link_to nc.clubname , nc
+									.col-sm-4.col-sm-offset-1
+										- if !nc.invited?(current_amitian)
+											#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{nc.id}" , 'data-owner': "#{nc.amitian.id}"} Ask
+										- else
+											.btn.btn-default.disabled
+												Already a member
+						-else
+							.alert.alert-info
+								No New Clubs.. 
+								%li{'data-target':'#clubs_create' , 'data-toggle':'modal'}
+									%a.modallink.grey  Create your club now
+						%hr
+
+						.lead.grey
+							Upcommin Events
+						- if @newevents.count != 0
+							- @newevents.each do |ne|
+								.single_suggestion.row
+									.col-sm-6
+										= image_tag ne.event_themepic
+										= link_to ne.eventtheme , ne
+									.col-sm-4.col-sm-offset-1
+										= render 'events/invite_form' , event: ne
+						- else
+							.alert.alert-info
+								No Upcomming Events.. 
+								%li{'data-target':'#events_create_amitian' , 'data-toggle':'modal'}
+									%a.modallink.grey Create your event now 
+
+
+						%hr
 			#create_footer.white.shadow.text-center
 				%p{'style':'font-weight:800; font-size: 17px;'} Create
 				.footer.navbar-default
@@ -77,7 +122,7 @@
 							%a.modallink Ads
 						%li=link_to 'CEO @AlaapDhall' , 'https://www.alaapdhall.in' , 'target':'_blank'
 					
-		#index_confessions.col-md-6.col-sm-6.col-xs-12
+		#index_confessions.col-sm-6.col-xs-12
 			- if current_amitian.sign_in_count < 3
 				#info.alert.alert-info.alert-dismissible.text-center
 					%p 
@@ -105,7 +150,7 @@
 					%span.glyphicon.glyphicon-remove.sugremove.right
 				.sugdiv.clearfix
 					-@suggetions2.each do |sug|
-						- if !current_amitian.following?(sug)
+						- if !current_amitian.myfollowing?(sug)
 							#single_suggestion2.shadow
 								%table
 									%tbody

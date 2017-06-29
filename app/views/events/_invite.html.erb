@@ -1,0 +1,8 @@
+<%if amitian_signed_in?%>
+<div id = "invitet_form">
+<p class="btn btn-primary" id="event_<%= event.id %>">
+<%= link_to 'Attend Event' , follow_event_path(event) , remote: true , 'style':'color: white;'%>
+
+ </p>
+</div>
+<%end%>

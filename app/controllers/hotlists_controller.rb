@@ -1,8 +1,5 @@
 class HotlistsController < ApplicationController
 
-def index
-	@hotlists = current_amitian.hotlisting
-end
 
 def create 
 

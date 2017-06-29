@@ -5,7 +5,7 @@ before_action :authenticate_amitian!
   def create
     @amitian = Amitian.find(params[:followed_id])
     
-    current_amitian.follow(@amitian)
+    current_amitian.myfollow(@amitian)
 create_notification_follow @amitian
      respond_to do |format|
       format.html {render nothing: true }
@@ -15,7 +15,7 @@ create_notification_follow @amitian
 
   def destroy
     @amitian = Relationship.find(params[:id]).followed
-    current_amitian.unfollow(@amitian)
+    current_amitian.myunfollow(@amitian)
      respond_to do |format|
       format.html { redirect_to @amitian }
       format.js

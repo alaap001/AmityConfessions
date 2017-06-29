@@ -50,7 +50,7 @@ def followers
 end
 
 def hotlisting   
-    @amitians = current_amitian.hotlisting
+    @amitians = current_amitian.hotlisting.order('RAND()')
     render 'show_hotlist'
 end
 

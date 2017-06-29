@@ -92,7 +92,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  if (window.location.href.indexOf('confessions') > -1 ){
+  if ((window.location.href.indexOf('confessions') > -1)  || (window.location.href.indexOf('clubs') > -1 ) || (window.location.href.indexOf('events') > -1 )){
 var rightBarControl;
 
 rightBarControl = function() {
@@ -123,39 +123,7 @@ rightBarControl = function() {
   }
 };
 }
- if (window.location.href.indexOf('clubs') > -1 ){
-var rightBarControl;
 
-rightBarControl = function() {
-  var leftBarWidth = $('#club_details').width();
-  var rightBarHeight, rightBarOffset, rightBarTop, rightBarWidth, scrollHeight, windowHeight;
-  windowHeight = $(window).height();
-  scrollHeight = $(window).scrollTop();
-  rightBarWidth = $('#index_top_confession_div').width();
-  rightBarHeight = $('#index_top_confession_div').outerHeight();
-  rightBarOffset = $('#club_confessions_div').offset().left + $('#club_confessions_div').outerWidth();
-  rightBarTop = 75;
-
-  if (windowHeight - 75 < rightBarHeight) {
-    rightBarTop = windowHeight - rightBarHeight;
-  }
-  if (windowHeight + scrollHeight - 75 >= rightBarHeight) {
-    $('#index_top_confession_div').css({
-      position: 'fixed',
-      left: rightBarOffset,
-      top: rightBarTop
-    });
-  } else {
-    $('#index_top_confession_div').css({
-      position: 'static',
-      left: rightBarOffset,
-      top: rightBarTop
-    });
-  }
-};
-
-
-}
 $(window).scroll(rightBarControl);
 
 $(window).resize(rightBarControl);
@@ -195,7 +163,7 @@ $(document).on('click' ,'#index_follow_form', function(event) {
     
   var id = $(target).parent().parent().data('sug-id');
   var currentid = $(target).parent().parent().data('current-id');
-  $('#follow_form_'+id).addClass('disabled');
+  $('.follow_form_'+id).addClass('disabled');
 
  $.ajax({
     url : "http://localhost:3000/relationships",
@@ -203,7 +171,7 @@ $(document).on('click' ,'#index_follow_form', function(event) {
     data : {followed_id: id , follower_id: currentid},
     success: function(data, textStatus, jqXHR)
     {
-      $('#follow_form_'+id).replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Following </p>');
+      $('.follow_form_'+id).replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Following </p>');
         //data - response from server
     },
     error: function (jqXHR, textStatus, errorThrown)
@@ -218,17 +186,17 @@ $(document).on('click' ,'#send_invite_btn', function(event) {
   var target = getEventTarget(event);
     
   var id = $(target).parent().parent().data('invite-link-id');
-  console.log(id);
   var clubid = $(target).parent().parent().data('club-id');
-  $('#invite_btn_'+id).addClass('disabled');
+  var notif = $(target).parent().parent().data('notif')
+  $('.invite_btn_'+id).addClass('disabled');
 
  $.ajax({
     url : "http://localhost:3000/clubmembers?amitian_id="+id+"&club_id="+clubid,
     type: "POST",
-    data : {amitian_id: id , club_id: clubid},
+    data : {amitian_id: id , club_id: clubid , notif_id: notif},
     success: function(data, textStatus, jqXHR)
     {
-      $('#invite_btn_'+id).replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Invitation Sent </p>');
+      $('.invite_btn_'+id).replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Invitation Sent </p>');
         //data - response from server
     },
     error: function (jqXHR, textStatus, errorThrown)

@@ -1,0 +1,9 @@
+.invite_link{'data-invite-link-id': "#{amitian.id}", 'data-club-id': "#{@club.id}" , 'data-notif': "#{notif_id}"}	
+	= link_to amitian.fullname, amitian
+	- if @club.requested?(amitian)
+		member
+	- elsif @club.pending?(amitian) && amitian != current_amitian
+		Sent 
+	-else
+		#send_invite_btn
+			%p.btn.btn-warning{'class': "invite_btn_#{amitian.id}"}  Invite

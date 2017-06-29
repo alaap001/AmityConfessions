@@ -5,6 +5,7 @@ class Amitian < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
  acts_as_voter
  has_many :feedbacks
+  acts_as_follower
   before_save { self.email = email.downcase }
   ## confessions
 has_many :confessions, dependent: :destroy
@@ -131,16 +132,16 @@ end
 end
 
 # Follows a amitian.
-  def follow(other_amitian)
+  def myfollow(other_amitian)
     following << other_amitian
   end
   # Unfollows a amitian.
-  def unfollow(other_amitian)
+  def myunfollow(other_amitian)
     following.delete(other_amitian)
   end
 
   # Returns true if the current amitian is following the other amitian.
-  def following?(other_amitian)
+  def myfollowing?(other_amitian)
     following.include?(other_amitian)
 end
   # hotlist an amitian

@@ -310,10 +310,10 @@ text-decoration: none;
 list-style: none;
 display: inline-block;
 }
-#single_suggestion{
+.single_suggestion{
 	margin: 15px 5px 0 5px;
 }
-#single_suggestion img{
+.single_suggestion img{
 	height: 41px;
 	width: 41px;
 }
@@ -848,8 +848,8 @@ font-size: 20px;
 	border-bottom-style: solid;
 	border-bottom-width: 1px; 
 }
-#club_photos{
-	margin: 0 3px 10px 3px;
+.club_photos{
+	margin: 0 3px 0px 3px;
 }
 .single_member{
 	padding: 5px;
@@ -864,7 +864,33 @@ font-size: 20px;
 .namehead a:hover{
 text-decoration: none;
 }
-
+/* events*/
 .margin{
-	height: 30px;
+	height: 25px;
+}
+.date{
+	font-size: 30px;
+	font-weight: 600;
+}
+.month{
+	font-size: 21px;
+	color: red;
+}
+.material-icons{
+	font-size: 5px
+}
+.location{
+	
+	text-transform: capitalize;
+
+}
+.clubsevent{
+	padding: 8px;
+	display: inline-block;
+	width: 100%;
+}
+.clubsevent a{
+	text-decoration: none;
+	color: black;
+	font-size: 16px;
 }

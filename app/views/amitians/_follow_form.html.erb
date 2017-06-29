@@ -1,7 +1,7 @@
 <%if amitian_signed_in?%>
 <% if @amitian != current_amitian %>
   <div id="follow_form_<%= @amitian.id %>">
-  <% if current_amitian.following?(@amitian) %>
+  <% if current_amitian.myfollowing?(@amitian) %>
     <%= render 'unfollow' %>
   <% else %>
     <%= render 'follow' %>

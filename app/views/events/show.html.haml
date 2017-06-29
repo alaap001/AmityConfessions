@@ -1,6 +1,6 @@
 #index_main_div
 	#events_main_div
-		#event_details.col-sm-3.col-xs-12
+		#index_user_detail.col-sm-3.col-xs-12
 			.text-center
 			
 				= image_tag 'calendar.png' , class: 'club_themepic img-rounded'
@@ -10,71 +10,86 @@
 				%small.grey
 					( #	
 					= @event.niche+' )'
-		#event_posts.col-sm-6.col-xs-12
-			.scrollmenu.shadow
-				.top_sug_layer.clearfix
-					.left.grey{'style':'font-size:17px;'} 
-						Suggested Events
-					.right
-						
-						%span.glyphicon.glyphicon-remove.sugremove
-
-				.sugdiv.clearfix
-					-@eventsug.each do |sug|
-						#single_suggestion2.shadow
-							%table
-								%tbody
-									%tr
-										%td
-											.text-center=image_tag sug.event_themepic , class: 'img-rounded'
-									%tr
-										%td{'style':'height:10px;'}
-									%tr
-										%td
-											.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
-									%tr
-										%td
-											%small.grey
-												.text-center= 'host: '+sug.amitian.fullname
-									%tr
-										%td{'style':'height:10px;'}
-
-									%tr
-										%td
-											Attend
-
-
 			.margin
-			.scrollmenu.shadow
-				.top_sug_layer.clearfix
-					.left.grey{'style':'font-size:17px;'} 
-						Upcomming Events
-					.right{'style':'font-weight: 600;'}
-						= link_to 'Explore More Events' , events_path 
-						%span.glyphicon.glyphicon-remove.sugremove
-				.sugdiv.clearfix
-					-@eventupcomming.each do |sug|
-						#single_suggestion2.shadow
-							%table
-								%tbody
-									%tr
-										%td
-											.text-center=image_tag sug.event_themepic , class: 'img-rounded'
-									%tr
-										%td{'style':'height:10px;'}
-									%tr
-										%td
-											.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
-									%tr
-										%td
-											%small.grey
-												.text-center= 'host: '+sug.amitian.fullname
-									%tr
-										%td{'style':'height:10px;'}
+			.white.shadow{'style':'padding:10px;'}
+				.event_date.text-center
+					.date= @event.start.strftime("%d")
+					.month= @event.start.strftime("%B")
+				%hr
+				%p.lead
+					- if @event.club.id != 0
+						= image_tag @event.club.club_themepic , class:'userdp img-rounded'
+						=link_to @event.club.clubname , @event.club , 'style':'text-decoration:none;'
+					-else
+						= image_tag @event.amitian.profilepic , class:'userdp'
+						=link_to @event.amitian.fullname , @event.amitian , 'style':'text-decoration:none;'
+					is organizing  
+					=@event.eventtheme+": tag, on "+@event.start.strftime("%A").to_s+", "+@event.start.strftime("%d.%B").to_s
+				.location_div.flex
+					%i.material-icons.grey room
+					.location.lead
+						%small
+							=@event.location+', '+@event.department+', '
+						
+							Amity
+							= @event.amitian.campus
+				.text-center
+					= render 'events/invite_form' , event: @event
 
-									%tr
-										%td
-											Attend
+			.margin 
+			#event_about_div
+				.grey.club_about_head About
+				.description.white.shadow
+					%p= auto_link(simple_format(@event.description))
+			.margin
+			.club_photos.row.white.shadow
+				.club_head.clearfix
+					.left{'style':'font-size: 17px;'} Event Photos 
+					= link_to 'See all' , '' , class: 'right grey' 
+				 
+				- @gallery.each do |post|
+					= image_tag post.event_post_image , class: 'club_photo col-sm-6 thumbnail'
+			.margin
+			.club_photos.row.white.shadow
+				.club_head.clearfix
+					.left{'style':'font-size: 17px;'} Amitians Attending 
+					 
+				- @eventmembers.each do |member|
+					= image_tag member.profilepic , class: 'club_photo col-sm-3 thumbnail' , style:'max-height:100px;'
+		#index_confessions.col-sm-6.col-xs-12
+			.margin
+			- if @eventupcomming.count > 5
+				.scrollmenu.shadow
+					.top_sug_layer.clearfix
+						.left.grey{'style':'font-size:17px;'} 
+							Upcomming Events
+						.right{'style':'font-weight: 600;'}
+							= link_to 'Explore More Events' , events_path 
+							%span.glyphicon.glyphicon-remove.sugremove
+					.sugdiv.clearfix
+						
+						-@eventupcomming.each do |sug|
+							#single_suggestion2.shadow
+								%table
+									%tbody
+										%tr
+											%td
+												.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+										%tr
+											%td{'style':'height:10px;'}
+										%tr
+											%td
+												.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+										%tr
+											%td
+												%small.grey
+													.text-center= 'Host: '+sug.amitian.fullname
+										%tr
+											%td{'style':'height:10px;'}
+
+										%tr
+											%td.text-center
+												= render 'invite_form' , event: sug
 			.margin
 			#club_theme.shadow
 				- if !@event.event_themepic? 
@@ -98,8 +113,48 @@
 							=image_tag @confession.event_post_image , class:'thumbnail' 
 								
 							=f.submit 'Post' , class: 'btn btn-primary right'
+			.margin
+			- if @eventsug.count > 5
+				.scrollmenu.shadow
+					.top_sug_layer.clearfix
+						.left.grey{'style':'font-size:17px;'} 
+							Suggested Events
+						.right
+							
+							%span.glyphicon.glyphicon-remove.sugremove
+
+					.sugdiv.clearfix
+					
+						-@eventsug.each do |sug|
+							#single_suggestion2.shadow
+								%table
+									%tbody
+										%tr
+											%td
+												.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+										%tr
+											%td{'style':'height:10px;'}
+										%tr
+											%td
+												.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+										%tr
+											%td
+												%small.grey
+													.text-center= 'Host: '+sug.amitian.fullname
+										%tr
+											%td{'style':'height:10px;'}
+
+										%tr
+											%td.text-center
+												= render 'invite_form' , event: sug
+
+
 			#confession_details
 				- @posts.each do |c|
 					= render 'eventposts/event_posts' , c: c
+				.margin
+				- if @posts.size == 0
+					.alert.alert-info
+						There are No update for the events as of now
 		
 		= render 'confessions/index_right_confession_div'

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'chatrooms/index'
 
+  get 'explore' , to: 'confessions#explore'
+
 devise_for :amitians, controllers: { sessions: 'amitians/sessions' }, path: '',path_names: { sign_in: 'login', sign_out: 'logout'}
 
 root 'home#index'
@@ -23,7 +25,12 @@ resources :clubposts do
     end
 end
 resources :clubmembers, only: [:create, :update, :destroy]
-resources :events
+resources :events do
+ member do
+    get :follow
+    get :unfollow
+  end
+end
 resources :eventposts do 
   resources :eventcomments
   member do

@@ -36,7 +36,7 @@
 								%tr
 									%td
 										#femaleform{'data-sug-id':"#{female.id}" , 'data-current-id': "#{current_amitian.id}"}
-											- if current_amitian.following?(female)
+											- if current_amitian.myfollowing?(female)
 												= render 'unfollow_female' , female: female
 											-else
 												= render 'confessions/follow' , sug: female
