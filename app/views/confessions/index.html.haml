@@ -60,12 +60,13 @@
 						- if @newclubs.count != 0
 							- @newclubs.each do |nc|
 								.single_suggestion.row
-									.col-sm-7
+									.col-sm-6
 										= image_tag nc.club_themepic
 										= link_to nc.clubname , nc
 									.col-sm-4.col-sm-offset-1
 										- if !nc.invited?(current_amitian)
-											#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{nc.id}" , 'data-owner': "#{nc.amitian.id}"} Ask
+											#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{nc.id}" , 'data-owner': "#{nc.amitian.id}"} 
+												.sendbtn{ 'id': "send_notif_#{nc.id}"} Ask
 										- else
 											.btn.btn-default.disabled
 												Already a member

@@ -37,7 +37,8 @@
 			#club_members.white.shadow
 				.club_head{'style':'font-size: 17px;'}
 					Members
-				 
+				
+
 				- if @member.size == 1
 					.alert.alert-warning
 						No Members in this Club... 
@@ -57,7 +58,8 @@
 						.live_search_results.white
 							- if @amitian.count > 0
 								- @amitian.each do |amitian|	
-									= render 'amitian_invite_form' , amitian: amitian , notif_id: 0
+									= render 'amitian_invite_form' , amitian: amitian , notif_id: 0 
+
 			#club_events.white.shadow
 				.club_head
 					Events
@@ -152,7 +154,8 @@
 				.alert.alert-danger
 					You are not the member of this club, Ask to Join the club
 					%br
-					#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"} Ask
+					#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"} 	
+						.sendbtn{ 'id': "send_notif_#{@club.id}"} Ask
 								
 
 			#confession_details

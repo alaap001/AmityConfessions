@@ -4,15 +4,9 @@ before_action :authenticate_amitian!
   def create
   	@club = Club.find(params[:club_id])
   	@amitian = Amitian.find(params[:amitian_id])
-      if params[:notif_id] != '0'
-        @notification = Notification.find(params[:notif_id]) 
-      else
-        @notification = nil
-      end
   @invitation = @club.clubmembers.build(amitian_id: params[:amitian_id])    
-  if @invitation.save  
-    Notification.destroy(@notification) if @notification != nil
-  end   
+  @invitation.save  
+     
       create_notification_invite @amitian,@club
       render nothing: true
   end

@@ -2,7 +2,7 @@
 	-if @interest == 'Male'
 		.container-fluid
 			-@male.each do |male|
-				= render 'male' , male: male
+				= render 'female' , female: male
 		#infinitescrolling.text-center
 			=will_paginate @male						
 

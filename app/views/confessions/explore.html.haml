@@ -1,0 +1,281 @@
+#index_main_div.container
+	.text-center
+		.h1{'style':'font-size:26px;font-weight: 800;'}
+			Explore What's Happeing Inside Campus
+			
+	.margin
+	.margin
+	.explorehead.text-center
+		= image_tag 'events.jpg' , class: 'eventlogo shadow'
+		.lead.grey
+			TRENDING EVENTS 
+	%hr.grey
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head POPULAR EVENTS
+		.panel-body
+			.events.row
+				.mainevent.col-sm-6
+					- if @mainevent != nil
+						%table
+							%tr
+								%td
+									= image_tag @mainevent.event_themepic , class: 'thumbnail mainpic'
+									%hr
+							%tr
+								%td{'style':'font-size:18px;font-weight: 800;'} 
+									= link_to @mainevent.eventtheme , @mainevent 
+							%tr
+								%td
+									%small=link_to " "+@mainevent.start.strftime("%A").to_s+", "+@mainevent.start.strftime("%d.%B").to_s 
+							%tr
+								%td
+									= link_to @mainevent.department
+					-else
+						%p show any random event in previous 7 days
+				.commingevent.col-sm-6
+					-@moreevent.each do |e|
+						%table.col-sm-6
+							%tr
+								%td
+									= image_tag e.event_themepic , class: 'thumbnail'
+							%tr
+								%td
+									= link_to e.eventtheme , e
+							%tr
+								%td
+									%small=link_to " "+e.start.strftime("%A").to_s+", "+e.start.strftime("%d.%B").to_s 
+							%tr
+								%td
+									= link_to e.department
+
+	#moreevent
+		.scrollmenu.shadow
+			.top_sug_layer.clearfix
+				.left{'style':'font-size:16px;font-weight: 800;'} 
+					Upcomming Events
+			%hr
+			.sugdiv.clearfix
+				
+				-@upcommingevent.each do |sug|
+					=#change this to something else
+					#single_suggestion2.shadow
+						%table
+							%tbody
+								%tr
+									%td
+										.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+								%tr
+									%td{'style':'height:10px;'}
+								%tr
+									%td
+										.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+								%tr
+									%td
+										%small.grey
+											.text-center= 'Host: '+sug.amitian.fullname
+								%tr
+									%td{'style':'height:10px;'}
+
+								%tr
+									%td.text-center
+										= render 'events/invite_form' , event: sug
+
+	.margin
+	.explorehead.text-center
+		= image_tag 'Club.ico' , class: 'eventlogo'
+		.lead.grey
+			TRENDING CLUBS
+	%hr.grey
+
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head POPULAR CLUBS
+		.panel-body
+			.events.row
+				.mainevent.col-sm-6
+					- if @mainclub != nil
+						%table
+							%tr
+								%td
+									= image_tag @mainclub.club_themepic , class: 'thumbnail mainpic'
+									%hr
+							%tr
+								%td{'style':'font-size:18px;font-weight: 800;'} 
+									= link_to @mainclub.clubname , @mainclub 
+							%tr
+								%td
+									%small=link_to " something here "
+							%tr
+								%td
+									= link_to @mainclub.niche
+					-else
+						%p show any random event in previous 7 days
+				.commingevent.col-sm-6
+					-@moreclub.each do |e|
+						%table.col-sm-6
+							%tr
+								%td
+									= image_tag e.club_themepic , class: 'thumbnail'
+							%tr
+								%td
+									= link_to e.clubname , e
+							%tr
+								%td
+									%small=link_to "something something "
+							%tr
+								%td
+									= link_to e.niche
+	#moreclubs
+		.scrollmenu.shadow
+			.top_sug_layer.clearfix
+				.left{'style':'font-size:16px;font-weight: 800;'} 
+					Recomended Clubs
+			%hr
+			.sugdiv.clearfix
+				
+				-@sugclub.each do |sug|
+					=#change this to something else
+					#single_suggestion2.shadow
+						%table
+							%tbody
+								%tr
+									%td
+										.text-center=image_tag sug.club_themepic , class: 'img-rounded'
+								%tr
+									%td{'style':'height:10px;'}
+								%tr
+									%td
+										.text-center=link_to sug.clubname , sug , 'style':' font-weight: 600;'
+								%tr
+									%td
+										%small.grey
+											.text-center= 'Host: '+sug.amitian.fullname
+								%tr
+									%td{'style':'height:10px;'}
+
+								%tr
+									%td.text-center
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head Trending Confessions
+		.panel-body
+			.topconfessions
+				-@topconfessions.each do |tc|
+					.singletopconfession.col-sm-3.shadow.col-xs-4
+						#confessor_name
+							.userdp
+								- if !tc.amitian.profilepic?
+									-if tc.amitian.gender == 'Male'
+										=image_tag ('93.svg')
+									-else 
+										=image_tag('manager_photo.svg')
+								-else
+									=link_to image_tag(tc.amitian.profilepic), tc.amitian 
+							.username
+								=link_to tc.amitian.fullname , amitian_path(tc.amitian) 
+								%p= time_ago_in_words(tc.created_at)+' ago'
+						= auto_link(simple_format(tc.confession[0..50]))
+						.topconfessimg.thumbail
+							- if tc.confessionimage?
+								=link_to image_tag(tc.confessionimage) , tc 
+							-else
+								=link_to image_tag('confessions.jpg') , tc 
+
+						.like_unlike_div{id: "like_#{tc.id}"}
+							= render 'like_unlike' , c: tc
+						%hr
+				
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head Most Hated Confessions
+		.panel-body
+			.topconfessions
+				-@hatedconfessions.each do |tc|
+					.singletopconfession.col-sm-3.shadow.col-xs-4
+						#confessor_name
+							.userdp
+								- if !tc.amitian.profilepic?
+									-if tc.amitian.gender == 'Male'
+										=image_tag ('93.svg')
+									-else 
+										=image_tag('manager_photo.svg')
+								-else
+									=link_to image_tag(tc.amitian.profilepic), tc.amitian 
+							.username
+								=link_to tc.amitian.fullname , amitian_path(tc.amitian) 
+								%p= time_ago_in_words(tc.created_at)+' ago'
+						= auto_link(simple_format(tc.confession[0..50]))
+						.topconfessimg.thumbail
+							- if tc.confessionimage?
+								=link_to image_tag(tc.confessionimage) , tc 
+							-else
+								=link_to image_tag('confessions.jpg') , tc 
+
+						.like_unlike_div{id: "like_#{tc.id}"}
+							= render 'like_unlike' , c: tc
+						%hr
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head Top Anonymous List 
+		.panel-body
+			.topconfessions
+				-@topanonyconfession.each do |tc|
+					.singletopconfession.col-sm-3.shadow.col-xs-4
+						#confessor_name
+							.userdp
+								- if !tc.amitian.profilepic?
+									-if tc.amitian.gender == 'Male'
+										=image_tag ('93.svg')
+									-else 
+										=image_tag('manager_photo.svg')
+								-else
+									=link_to image_tag(tc.amitian.profilepic), tc.amitian 
+							.username
+								=link_to tc.amitian.fullname , amitian_path(tc.amitian) 
+								%p= time_ago_in_words(tc.created_at)+' ago'
+						= auto_link(simple_format(tc.confession[0..50]))
+						.topconfessimg.thumbail
+							- if tc.confessionimage?
+								=link_to image_tag(tc.confessionimage) , tc 
+							-else
+								=link_to image_tag('confessions.jpg') , tc 
+
+						.like_unlike_div{id: "like_#{tc.id}"}
+							= render 'like_unlike' , c: tc
+						%hr
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head Recently found matches
+		.panel-body
+			.topconfessions
+				-@friendships.each do |tc|
+					.singletopconfession.col-sm-3.shadow.col-xs-4
+						#confessor_name
+							.userdp
+								- if !tc.amitian.profilepic?
+									-if tc.amitian.gender == 'Male'
+										=image_tag ('93.svg')
+									-else 
+										=image_tag('manager_photo.svg')
+								-else
+									=link_to image_tag(tc.amitian.profilepic), tc.amitian 
+							.username
+								=link_to tc.amitian.fullname , amitian_path(tc.amitian) 
+								
+						.topconfessimg.thumbail
+							
+						%hr
+	

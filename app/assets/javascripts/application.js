@@ -218,7 +218,7 @@ $(document).on('click','#send_notif',function(e){
     data: {notice_type: "ask_invite" , notified_by_id: amitian , club_id: club , amitian_id: owner},
 
     success: function(data,Status,jqXHR){
-      $('#send_notif').replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Request Sent </p>');
+      $('#send_notif_'+club).parent().replaceWith('<p class="btn disabled btn-default"><span class="glyphicon glyphicon-ok"><span/> Request Sent </p>');
     }
   });
 });

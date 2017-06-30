@@ -1,9 +1,9 @@
 <%if amitian_signed_in?%>
   <div id="event_join_form" , data-invite-id = "<%= event.id %>" , data-current-id = "<%= current_amitian.id %>" >
   <% if current_amitian.following?(event) %>
-    <%= render 'invited', event: event %>
+    <%= render 'events/invited', event: event %>
   <% else %>
-    <%= render 'invite', event: event %>
+    <%= render 'events/invite', event: event %>
   <% end %>
   </div>
 <%end%>

@@ -17,7 +17,7 @@
 					.month= @event.start.strftime("%B")
 				%hr
 				%p.lead
-					- if @event.club.id != 0
+					- if @event.club != nil
 						= image_tag @event.club.club_themepic , class:'userdp img-rounded'
 						=link_to @event.club.clubname , @event.club , 'style':'text-decoration:none;'
 					-else
@@ -46,9 +46,12 @@
 				.club_head.clearfix
 					.left{'style':'font-size: 17px;'} Event Photos 
 					= link_to 'See all' , '' , class: 'right grey' 
-				 
-				- @gallery.each do |post|
-					= image_tag post.event_post_image , class: 'club_photo col-sm-6 thumbnail'
+				- if @gallery.count == 0
+					.alert.alert-info 
+						No Photos to Show
+				-else
+					- @gallery.each do |post|
+						= image_tag post.event_post_image , class: 'club_photo col-sm-6 thumbnail'
 			.margin
 			.club_photos.row.white.shadow
 				.club_head.clearfix
@@ -58,38 +61,38 @@
 					= image_tag member.profilepic , class: 'club_photo col-sm-3 thumbnail' , style:'max-height:100px;'
 		#index_confessions.col-sm-6.col-xs-12
 			.margin
-			- if @eventupcomming.count > 5
-				.scrollmenu.shadow
-					.top_sug_layer.clearfix
-						.left.grey{'style':'font-size:17px;'} 
-							Upcomming Events
-						.right{'style':'font-weight: 600;'}
-							= link_to 'Explore More Events' , events_path 
-							%span.glyphicon.glyphicon-remove.sugremove
-					.sugdiv.clearfix
-						
-						-@eventupcomming.each do |sug|
-							#single_suggestion2.shadow
-								%table
-									%tbody
-										%tr
-											%td
-												.text-center=image_tag sug.event_themepic , class: 'img-rounded'
-										%tr
-											%td{'style':'height:10px;'}
-										%tr
-											%td
-												.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
-										%tr
-											%td
-												%small.grey
-													.text-center= 'Host: '+sug.amitian.fullname
-										%tr
-											%td{'style':'height:10px;'}
 
-										%tr
-											%td.text-center
-												= render 'invite_form' , event: sug
+			.scrollmenu.shadow
+				.top_sug_layer.clearfix
+					.left.grey{'style':'font-size:17px;'} 
+						Upcomming Events
+					.right{'style':'font-weight: 600;'}
+						= link_to 'Explore More Events' , events_path 
+						%span.glyphicon.glyphicon-remove.sugremove
+				.sugdiv.clearfix
+					
+					-@eventupcomming.each do |sug|
+						#single_suggestion2.shadow
+							%table
+								%tbody
+									%tr
+										%td
+											.text-center=image_tag sug.event_themepic , class: 'img-rounded'
+									%tr
+										%td{'style':'height:10px;'}
+									%tr
+										%td
+											.text-center=link_to sug.eventtheme , sug , 'style':' font-weight: 600;'
+									%tr
+										%td
+											%small.grey
+												.text-center= 'Host: '+sug.amitian.fullname
+									%tr
+										%td{'style':'height:10px;'}
+
+									%tr
+										%td.text-center
+											= render 'invite_form' , event: sug
 			.margin
 			#club_theme.shadow
 				- if !@event.event_themepic? 
@@ -114,7 +117,7 @@
 								
 							=f.submit 'Post' , class: 'btn btn-primary right'
 			.margin
-			- if @eventsug.count > 5
+			- if @eventsug.count > 3
 				.scrollmenu.shadow
 					.top_sug_layer.clearfix
 						.left.grey{'style':'font-size:17px;'} 

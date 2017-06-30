@@ -1,4 +1,4 @@
-.invite_link{'data-invite-link-id': "#{amitian.id}", 'data-club-id': "#{@club.id}" , 'data-notif': "#{notif_id}"}	
+.invite_link{'data-invite-link-id': "#{amitian.id}", 'data-club-id': "#{@club.id}"}	
 	= link_to amitian.fullname, amitian
 	- if @club.requested?(amitian)
 		member

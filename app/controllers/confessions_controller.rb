@@ -77,7 +77,54 @@ end
 end
 
 def explore
+if current_amitian.about_amitian == nil
+  redirect_to new_about_amitian_url
+else
+mainevent = Event.where(start: Time.now-1.days .. Time.now+1.days)
 
+mainevent = Event.find_by_sql(" SELECT events.*, COUNT(events.id) AS total_followers
+  FROM events
+  INNER JOIN follows ON events.id = follows.id
+  GROUP BY follows.id
+  ORDER BY total_followers DESC;")
+# important point is that i have to sort this out based o max no of followers
+@mainevent = mainevent.first
+moreevent = mainevent - Array.[](@mainevent)
+@moreevent = moreevent.take(4)
+@upcommingevent = Event.where(start: Time.now-1.days .. Time.now+8.days).where.not(id: @mainevent.id)
+.order('start ASC').limit(10)
+
+mainclub = Club.find_by_sql("SELECT c.*, COUNT(cm.id) AS total
+FROM clubs c INNER JOIN
+     clubmembers cm
+     ON c.id = cm.club_id
+GROUP BY c.id
+ORDER BY total ASC;")
+
+@mainclub = mainclub.first
+moreclub = mainclub - Array.[](@mainclub)
+@moreclub = moreclub.take(4)
+@sugclub = Club.all.order('created_at DESC')
+
+@anonymous = Amitian.find_by(email: 'anonymous@anonymous.com')
+@topconfessions = Confession.where.not(amitian_id: @anonymous.id).order('cached_votes_up DESC').limit(8)
+@hatedconfessions = Confession.where.not(amitian_id: @anonymous.id).order('cached_votes_down DESC').limit(8)
+@topanonyconfession = Confession.where(amitian: @anonymous.id).order('cached_votes_up DESC')
+@friendships = Friendship.where(accepted: '1').order('updated_at DESC')
+@interest = current_amitian.about_amitian.interest if current_amitian.about_amitian.interest?
+
+@male = Amitian.where.not(id: current_amitian.id).where('gender = "Male"').order('RAND()').limit(20)    
+@female = Amitian.where.not(id: current_amitian.id).where('gender = "Female"').order('RAND()').limit(20)
+# only show images... don't create a div with name or follow form.. 
+# just images straint in a div.. col-sm-1 12 n a linie
+newcommers = Amitian.where(created_at: Time.now-15.days .. Time.now).limit(10).order('RAND()')
+
+newcommersid = current_amitian.following.ids + Array.[](current_amitian.id)
+
+@newcommers = newcommers.where.not(id: newcommersid).limit(4).order('RAND()')
+
+
+end
 end
 
 def show 
@@ -106,7 +153,6 @@ def downvote
   end
 end
 
-
 def create
 	@anonymous = Amitian.where(email: 'anonymous@anonymous.com')
   @anonymous.each do |a|
@@ -121,7 +167,6 @@ if @confession.save
   else
   	redirect_to :back
   end
-
 end
 	
   def edit

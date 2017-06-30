@@ -57,7 +57,7 @@ width: 200px;
 }
 
 .navmain{
-	height: 52px;
+	height: 56px;
 }
 .navbar-inverse{
 		background: #00aa8d;
@@ -183,7 +183,8 @@ max-height: 450px;
 }
 #index_main_div{
 	position: relative;
-	top:30px;
+	top:34px;
+	padding: 22px;
 }
 
 #input{
@@ -610,11 +611,6 @@ margin: 0 auto 0 auto;
 	
 }
 
-
-#index_main_div{
-	padding-top: 22px; 
-}
-
 .messages-list {
   max-height: 250px;
   overflow-y: auto;
@@ -893,4 +889,27 @@ text-decoration: none;
 	text-decoration: none;
 	color: black;
 	font-size: 16px;
+}
+/* explore styles */
+
+.eventlogo{
+	height: 150px;
+
+}
+.events img{
+	width: 100%;
+}
+.singletopconfession{
+	height: 400px;
+	padding: 5px;
+	margin-bottom: 15px;
+	overflow-y: auto;
+}
+.topconfessimg img{
+	height: 190px;
+	width: 100%;
+}
+
+.mainpic{
+	max-height: 450px;
 }

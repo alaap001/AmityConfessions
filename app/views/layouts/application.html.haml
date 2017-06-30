@@ -59,7 +59,8 @@
 												= render 'amitians/request_form'
 									%li=link_to 'Feeling Lucky ?' , feeling_index_path
 								%li=link_to 'Home', root_path
-								-if amitian_signed_in?														
+
+								-if amitian_signed_in?				
 									%li.dropdown
 										%a.dropdown-toggle{'data-toggle':'dropdown','role':'button','aria-haspopup':'true','aria-expanded':'false'}
 											My Profile
@@ -67,6 +68,7 @@
 										%ul.dropdown-menu
 											%li= link_to current_amitian.fullname , current_amitian
 											%li= link_to 'My Hotlists' ,hotlisting_amitian_path(current_amitian)
+											%li= link_to 'Explore' , explore_path
 											%li= link_to 'Settings' , edit_amitian_registration_path(current_amitian)
 											%li=link_to 'Sign Out', destroy_amitian_session_path, method: :delete , data: {confirm: 'Are you sure ?'}
 								-else
@@ -78,6 +80,9 @@
 										.form-group
 											=text_field_tag :amitian_search, params[:amitian_search]  , class: 'form-control', 'placeholder': 'Search'
 											=submit_tag 'search' , name: nil , class: 'btn'
+
+							
+							
 			#contentofmain
 				.notice
 					=notice

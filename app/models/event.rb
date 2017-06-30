@@ -12,7 +12,6 @@ class Event < ApplicationRecord
      validates :description , presence: true, length: { minimum: 5, maximum: 1000 } 
      validate :validate_timmings
      acts_as_followable
-     has_many :eventmembers
       has_many :eventposts, dependent: :destroy
       has_many :notifications , dependent: :destroy
        	def validate_timmings
@@ -22,4 +21,5 @@ class Event < ApplicationRecord
        		end
        	end
        	end
+
 end
