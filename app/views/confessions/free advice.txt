@@ -43,28 +43,27 @@ how to create the hotlist..
 
 		and then show new commers
 
+01171123123
        show all the categories/niche at the end ...
        reemove horizontal scroll and replace that by see more like facebook 
 
+       give clubs and events their default theme image rather than display nothing
+
        give opstion to create event or club directly on explore page
 
+       Sort Eplore page based on your campus
+
+       add research paper work
+       	
 		last part 
 		Do some public cofessions
 		that are visible to all and are limit to last 100 public confessions ... 
 		think about this before implement
+
+		infinite scrolling in amitian photos is still left
 
 IMPORTANT
 	in your confession index page... along with your current confessions add cpnfessions of clubs i follow and event i am going to
  //
 
 
-some points like don't click on adds, 
-startinng from install// 2 ver 32 bit and 64 bit is confusing
-after installing give details of scan types and virus types of s[ecific antiviruses . like sandbox , SecureLine VPN 
-
-how spftware companied can improve
-
-software must be language compatible... not everyone know english
-softwares can hve 2 modes... can be aked after installation ... advanced and basic ( without scan capabilities like rootkit , bootscan ol)
-
-created

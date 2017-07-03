@@ -26,7 +26,7 @@
 						%li=link_to pluralize(@amitian.confessions.count,"Confession") , @amitian
 						%li= link_to pluralize(@amitian.followers.count,'Follower'), followers_amitian_path(@amitian) , id: 'followers' 
 						%li= link_to pluralize(@amitian.following.count,'Following'), following_amitian_path(@amitian)
-						%li= link_to 'Photos'
+						%li= link_to 'Photos' , photos_path(@amitian.id)
 						%li= link_to pluralize(@total, 'Connection') 
 						%li=link_to 'About' , about_amitian_path 
 						-if @amitian == current_amitian

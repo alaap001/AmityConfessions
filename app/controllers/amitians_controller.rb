@@ -35,6 +35,11 @@ respond_to do |format|
  end
 end
 
+def photos
+@amitian = Amitian.find(params[:id])
+@photos = Confession.where(amitian_id: @amitian).paginate(page: params[:page], per_page: 36).order('created_at DESC')
+  end
+
 def following
     @title = "Following"
     @amitian  = Amitian.find(params[:id])

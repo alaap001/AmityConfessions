@@ -1,0 +1,19 @@
+#index_main_div_amitians
+	.photosheader
+		= render 'show_profile_head'
+	.margin
+	.panel.panel-default
+		.panel-heading
+			.panel-title
+				.club_about_head 
+					Photos of
+					= @amitian.fullname
+		.panel-body
+			.container-fluid
+				- @photos.each do |photos|
+					-if photos.confessionimage?
+						.photos.col-sm-2.thumbnail
+							= image_tag photos.confessionimage
+
+#infinitescrolling.text-center
+	=will_paginate	@photos

@@ -1,0 +1,9 @@
+<% if @clubposts %>
+<% @clubposts.each do |cp| %>
+$('#index_confessions .panel-body').append("<%= j render 'club_photos' , cp: cp %>");
+$('.pagination').replaceWith("<%= j will_paginate @clubposts %>");
+<% end %>
+<% if !@clubposts.next_page %>
+  $('.pagination').remove();
+<% end %>
+<% end %>

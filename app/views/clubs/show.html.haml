@@ -29,7 +29,7 @@
 			.club_photos.row.white.shadow
 				.club_head.clearfix
 					.left{'style':'font-size: 17px;'} Photos 
-					= link_to 'See all' , '' , class: 'right grey' 
+					= link_to 'See all' ,clubphotos_path(@club) , class: 'right grey' 
 				 
 				- @gallery.each do |post|
 					= image_tag post.clubpost_image , class: 'club_photo col-sm-6 thumbnail'
@@ -103,8 +103,11 @@
 						%ul.nav.navbar-nav.col.text-center
 							%li= link_to 'Created By: '+@club.amitian.fullname.to_s , @club.amitian
 							%li=link_to pluralize(@member.count,"Member") , @club
-							%li= link_to 'Photos'
+							%li= link_to 'Photos' , clubphotos_path(@club)
 							%li= link_to 'Events'
+							- if @club.amitian == current_amitian
+								%li{'data-target':'#clubs_create' , 'data-toggle':'modal'}
+									%a.modallink.grey  Edit Club 
 
 
 			-if @member.include?(current_amitian)				
@@ -166,4 +169,5 @@
 
 		= render 'confessions/index_right_confession_div'
 = render 'modals/events_create'
+= render 'modals/club_create'
 	

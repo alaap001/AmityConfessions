@@ -1,7 +1,12 @@
 %li.notif_lnk
 
 	-if notification.notice_type != 'invites'
-		-if notification.notified_by.profilepic? 
+		-if !notification.notified_by.profilepic? 
+			- if notification.notified_by.gender == 'Male'
+				=image_tag '93.svg',class:'pic shadow'
+			-else
+				=image_tag 'manager_photo.svg' , class:'pic shadow'
+		-else
 			=image_tag((notification.notified_by.profilepic),class:'pic shadow')
 	- if notification.notice_type  == 'like'
 		= link_to "#{notification.notified_by.fullname} has #{notification.notice_type}d your confession '#{notification.confession.confession[0..30]}'", link_through_path(notification) 

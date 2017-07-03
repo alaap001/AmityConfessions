@@ -11,7 +11,9 @@ before_action :authenticate_amitian!
     @posts = Eventpost.where(event_id: @event.id).order('created_at DESC')
     
     @eventsug = Event.where(niche: @event.niche)
-    
+    if @event.club_id != 0
+        @club = @event.club
+    end
     @eventupcomming = Event.where(start: Time.now .. Time.now+ 7.days).order('start ASC')
     
     clubowner = current_amitian.clubs
@@ -46,6 +48,8 @@ before_action :authenticate_amitian!
   def create
   	@event = current_amitian.events.build(event_params)
   	@event.club_id = params[:club_id]
+    @event.campus_event = params[:campus]
+
   	if @event.save
   		redirect_to @event
   	else
@@ -56,6 +60,7 @@ before_action :authenticate_amitian!
   end
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   def follow
@@ -66,6 +71,13 @@ before_action :authenticate_amitian!
   end
 
   def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to :back
+    else
+      render 'edit'
+    end
+
   end
 
   def detroy
@@ -74,7 +86,7 @@ before_action :authenticate_amitian!
 
 private
 def event_params
-params.require(:event).permit(:eventtheme,:location,:start,:endtime,:description,:tags,:event_themepic,:department,:niche,:club_id)
+params.require(:event).permit(:eventtheme,:location,:start,:endtime,:description,:campus_event,:tags,:event_themepic,:department,:niche,:club_id)
 	end
 
 end

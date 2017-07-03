@@ -105,18 +105,18 @@ ORDER BY total ASC;")
 moreclub = mainclub - Array.[](@mainclub)
 @moreclub = moreclub.take(4)
 @sugclub = Club.all.order('created_at DESC')
-
+@campus = params[:campus]
 @anonymous = Amitian.find_by(email: 'anonymous@anonymous.com')
 @topconfessions = Confession.where.not(amitian_id: @anonymous.id).order('cached_votes_up DESC').limit(8)
 @hatedconfessions = Confession.where.not(amitian_id: @anonymous.id).order('cached_votes_down DESC').limit(8)
-@topanonyconfession = Confession.where(amitian: @anonymous.id).order('cached_votes_up DESC')
-@friendships = Friendship.where(accepted: '1').order('updated_at DESC')
+@topanonyconfession = Confession.where(amitian: @anonymous.id).order('cached_votes_up DESC').limit(8)
+@friendships = Friendship.where(accepted: '1').order('updated_at DESC').where(updated_at: Time.now-7.days .. Time.now)
 @interest = current_amitian.about_amitian.interest if current_amitian.about_amitian.interest?
-
-@male = Amitian.where.not(id: current_amitian.id).where('gender = "Male"').order('RAND()').limit(20)    
-@female = Amitian.where.not(id: current_amitian.id).where('gender = "Female"').order('RAND()').limit(20)
+@male = Amitian.where.not(id: current_amitian.id).where('gender = "Male"').order('RAND()').limit(12)    
+@female = Amitian.where.not(id: current_amitian.id).where('gender = "Female"').order('RAND()').limit(12)
 # only show images... don't create a div with name or follow form.. 
 # just images straint in a div.. col-sm-1 12 n a linie
+
 newcommers = Amitian.where(created_at: Time.now-15.days .. Time.now).limit(10).order('RAND()')
 
 newcommersid = current_amitian.following.ids + Array.[](current_amitian.id)
@@ -162,6 +162,8 @@ else
   @confession = current_amitian.confessions.build(confession_params)
  end
 end
+@confession.campus_confession = params[:campus]
+
 if @confession.save
   	redirect_to :back
   else
@@ -196,7 +198,7 @@ end
 
 private
 def confession_params
-	params.require(:confession).permit(:confession,:confessionimage,:remove_confessionimage,:postid)
+	params.require(:confession).permit(:confession,:confessionimage,:campus_confession,:remove_confessionimage,:postid)
 	end
 end
 

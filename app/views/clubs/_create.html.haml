@@ -1,27 +1,36 @@
-#club_create_form
-	= form_for @club do |f|
-		.form_group
-			= f.label :ClubName
-			= f.text_field :clubname
-		.form_group
-			=f.label :ThemeOfClub
-			=f.text_field :club_theme
-		.form_group
-			=f.label :YourNiche
-			=f.text_field :niche
-		.form_group
-			=f.label :website
-			= f.text_field :website
-		.form_group
-			=f.label :description
-			= f.text_area :description
-		.form_group
-			=f.label :club_themepic
-			= f.file_field :club_themepic
-		.form_group
-			=f.label :club_cover
-			=f.file_field :club_cover
-		.form_group
-			= f.submit
 
-	
+= form_for @club do |f|
+	= hidden_field_tag :campus , current_amitian.campus
+	.lead.grey.text-center
+		Create Your Club
+	.form-group.text-center
+		=f.label :club_themepic , "Upload Club Theme" , class: 'filebutton'
+		%span.fileimage
+			=f.file_field :club_themepic
+	.form-group.text-center
+		=f.label :club_cover , "Upload Club Cover" , class: 'filebutton'
+		%span.fileimage
+			=f.file_field :club_cover
+	%hr
+	.form_group
+		= f.label :ClubName , "Club Name  "
+		= f.text_field :clubname
+	%br
+	.form_group
+		=f.label :ThemeOfClub , "Club Theme  "
+		=f.text_field :club_theme
+	%br
+	.form_group
+		=f.label :website
+		= f.text_field :website
+	%br
+	.form_group
+		=f.label :description
+		= f.text_area :description , class: 'form-control'
+	%br
+	.form-group
+		=f.label :niche
+		=f.select :niche, options_for_select([['Entertainment','Entertainment'],['Dance','Dance'],['Technical','Technical'],['Music' , 'Music'] ,['Party','Party'],['Fest','Fest'],['Fashion','Fashion'] , ['Drama','Drama'], ['Others','Others']]) ,{'class':'form-control'}
+	.form_group
+		= f.submit "Create Club", class:'btn btn-primary'
+

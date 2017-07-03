@@ -25,7 +25,10 @@
 						-@male.each do |male|
 							#match.inline-block
 								%span.glyphicon.glyphicon-heart{'style': 'color: pink; margin-right: 5px;'}
-								=image_tag male.profilepic ,class: 'userdp'
+								- if !male.profilepic?
+									=image_tag '93.svg',class:'userdp'
+								-else
+									=image_tag male.profilepic , class: 'userdp'
 								=link_to male.fullname , male 
 							
 							
@@ -33,9 +36,12 @@
 						-@female.each do |female|
 							#match.inline-block
 								%span.glyphicon.glyphicon-heart{'style': 'color: pink; margin-right: 5px;'}
-								=image_tag female.profilepic ,class: 'userdp'
+								- if !female.profilepic?
+									=image_tag 'manager_photo.svg' , class:'userdp'
+								-else
+									=image_tag female.profilepic , class: 'userdp'				
 								=link_to female.fullname ,female
-							
+					
 					
 	#mini_chat_box.shadow
 		.panel.panel-primary

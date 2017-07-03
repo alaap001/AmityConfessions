@@ -7,7 +7,11 @@
 			.messages-list
 				%ul
 					=render 'conversations/conversation_content' , messages: c.messages , amitian: amitian
-			=form_for [c,c.messages.new] , remote: true do |f|
-				= f.hidden_field :amitian_id , value: amitian.id
-				= f.text_area :body , class: 'form-control'
-				=f.submit 'send' , class: 'btn btn-success'
+
+
+			%form.new_message
+				%input{'name':'conversation_id','type':'hidden','value': "#{c.id}"}
+				%input{'name':'amitian_id','type':'hidden' , 'value':"#{amitian.id}"}
+				%textarea{'name':'body','class':'form-control'}
+				%input{'type':'submit','class':'btn btn-success' , 'value':'send'}
+			

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627194158) do
+ActiveRecord::Schema.define(version: 20170703063007) do
 
   create_table "about_amitians", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "bio",                 limit: 65535
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170627194158) do
     t.string   "website"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "campus_club"
   end
 
   create_table "clubscomments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170627194158) do
     t.integer  "cached_weighted_total",                 default: 0
     t.float    "cached_weighted_average", limit: 24,    default: 0.0
     t.integer  "amitian_id"
+    t.string   "campus_confession"
     t.index ["cached_votes_down"], name: "index_confessions_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_confessions_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_confessions_on_cached_votes_total", using: :btree
@@ -185,6 +187,7 @@ ActiveRecord::Schema.define(version: 20170627194158) do
     t.integer  "club_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "campus_event"
   end
 
   create_table "feedbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

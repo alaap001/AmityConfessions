@@ -28,6 +28,23 @@ var id = $('#eventdata').data('event')
   dealEndDate = new Date(startday);
   $('#countDownTimer').countdown({until: dealEndDate});
 */
+
+/* set campus */
+var ele = $('#Campuses');
+var campus =  ele.data('campus')
+ele.val(campus)
+$('#campusbtn').removeClass('disabled')
+$(document).on('click','#campusbtn',function(){
+    var e = document.getElementById("Campuses");
+    $(this).addClass('disabled')
+    var strUser = e.options[e.selectedIndex].text;
+   location.href = "http://localhost:3000/explore/"+strUser
+   
+});
+
+
+
+/* Enter to br in text box */
 $('#contentbox').on('keypress' , function(e){
   if(e.which == 13){
 
@@ -92,11 +109,10 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  if ((window.location.href.indexOf('confessions') > -1)  || (window.location.href.indexOf('clubs') > -1 ) || (window.location.href.indexOf('events') > -1 )){
+  if ((window.location.href.indexOf('confessions') > -1)  || (window.location.href.indexOf('clubs') > -1 ) || (window.location.href.indexOf('events') > -1 ) || (window.location.href.indexOf('photos') > -1 )){
 var rightBarControl;
 
 rightBarControl = function() {
-  var leftBarWidth = $('#index_user_detail').width();
   var rightBarHeight, rightBarOffset, rightBarTop, rightBarWidth, scrollHeight, windowHeight;
   windowHeight = $(window).height();
   scrollHeight = $(window).scrollTop();
@@ -133,22 +149,22 @@ $('#search').addClass('form-control');
 });
 
 
-
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();
     var panel = $(this).parent().parent();
     var messages_list = panel.find('.messages-list');
- 
+
     panel.find('.panel-body').toggle();
     panel.attr('class', 'panel panel-default');
- 
+
     if (panel.find('.panel-body').is(':visible')) {
       var height = messages_list[0].scrollHeight;
       messages_list.scrollTop(height);
     }
-    });
+  });
 })();
+
 
 // AJAX REQUESTS
 

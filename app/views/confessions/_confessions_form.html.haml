@@ -3,6 +3,7 @@
 		#input_div
 			=form_for @confession  do |f|
 				#input
+					= hidden_field_tag :campus , current_amitian.campus
 					=f.text_area :confession , require: true, placeholder: 'Confess !!' , class: 'form-control' , 'id':'contentbox'
 					=f.label :postAs
 					=f.select(:postid,options_for_select([[@confession.amitian.fullname,@confession.amitian.fullname],[a.fullname,a.fullname]]), class: 'form-control') 

@@ -1,0 +1,34 @@
+#index_main_div
+	#index_confessions.col-sm-9
+		#club_theme.shadow
+			- if !@club.club_cover? 
+				- if @club.amitian == current_amitian
+					.upload_div
+						.upload_btn.btn 
+							=link_to 'Upload Picture as Theme' 
+				-else
+					.upload_div
+			-else
+				= image_tag @club.club_cover 
+		.margin
+		.panel.panel-default
+			.panel-heading
+				.panel-title
+					.club_about_head 
+						Photos of
+						=@club.clubname
+			.panel-body
+				- if @member.include?(current_amitian)
+					-@clubposts.each do |cp|
+						= render 'club_photos' , cp: cp
+				-else
+					.alert.alert-info
+						%p 
+							You are not the member of 
+							= @club.clubname
+							Join the group to see photos
+							#send_notif.btn.btn-primary{'data-amitian': "#{current_amitian.id}" , 'data-club-id': "#{@club.id}" , 'data-owner': "#{@club.amitian.id}"}
+								.sendbtn{ 'id': "send_notif_#{@club.id}"} Ask to join
+	= render 'confessions/index_right_confession_div'
+	#infinitescrolling.text-center
+		=will_paginate	@clubposts		

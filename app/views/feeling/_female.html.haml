@@ -3,7 +3,14 @@
 		%table{'style':'width: 100%;'}
 			%tr	
 				%td.tdimage
-					=image_tag female.profilepic, class: 'friendimg'
+					- if !female.profilepic?
+						-if female.gender == 'Male'
+							=image_tag '93.svg',class:'friendimg'
+						-else 
+							=image_tag 'manager_photo.svg' , class:'friendimg'
+					-else
+						=image_tag female.profilepic , class: 'friendimg'
+
 				%td{'style':'width: 20px;'}
 				%td
 					%table

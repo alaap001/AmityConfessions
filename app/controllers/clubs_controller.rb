@@ -59,8 +59,41 @@ end
   
   end
 
+  def photos
+    @club = Club.find(params[:id])
+    amitians2 = @club.active_invitations
+    
+    ownerw = @club.amitian
+    
+    owner = Array.[](ownerw)
+    
+    @member = amitians2 + owner
+
+    @clubposts = Clubpost.where(club_id: @club).paginate(page: params[:page], per_page: 42).order('created_at DESC')
+
+    clubowner = current_amitian.clubs
+    
+    clubmember = current_amitian.clubmembers
+    
+    @myclubs = clubowner + clubmember
+
+    @topstory = TOP_STORY
+    
+     @interest = current_amitian.about_amitian.interest if current_amitian.about_amitian.interest?
+    
+      @male = Amitian.where.not(id: current_amitian.id).where('gender = "Male"').order('RAND()').limit(5)
+
+      @female = Amitian.where.not(id: current_amitian.id).where('gender = "Female"').order('RAND()').limit(5)
+    
+     @friends = current_amitian.active_friends + current_amitian.received_friends
+    
+
+  end
+
   def create
   	@club = current_amitian.clubs.build(club_params)
+    @club.campus_club = params[:campus]
+
     if @club.save
         redirect_to @club
       else
@@ -94,6 +127,6 @@ end
 private
 
 def club_params
-	params.require(:club).permit(:clubname,:club_theme,:description,:club_themepic,:club_cover,:niche,:amitian_id,:website)
+	params.require(:club).permit(:clubname,:club_theme,:description,:campus_club,:club_themepic,:club_cover,:niche,:amitian_id,:website)
 end
 end

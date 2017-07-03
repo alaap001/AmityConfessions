@@ -1,0 +1,40 @@
+.lead.grey.text-center
+	Create an Event
+
+.form-group.text-center
+	=f.label :event_themepic , "Upload Event Theme" , class: 'filebutton'
+	%span.fileimage
+		=f.file_field :event_themepic
+%hr
+.form-group
+	= f.label :Name , "Event Name  "
+	=f.text_field :eventtheme
+.form-group
+	= f.label :EventTagLine  , "Event Tagline  "
+	= f.text_field :tags 
+.form-group
+	= f.label :Location   , "Location of Event  "
+	=f.text_field :location
+%hr
+.lead.text-center
+	Event Timmings
+.form-group
+	= f.label :StartTime  , "Start  "
+	=f.datetime_local_field :start 
+.form-group
+	= f.label :EndTime  , "End  "
+	=f.datetime_local_field :endtime
+%hr
+.form-group
+	= f.label :AboutEvent , "About "
+	=f.text_area :description , class: 'form-control'
+.form-group
+	= f.label :department , "Organizing Department "
+	=f.text_field :department
+.form-group
+	=f.label :niche
+	=f.select :niche, options_for_select([['Entertainment','Entertainment'],['Dance','Dance'],['Technical','Technical'],['Music' , 'Music'] ,['Party','Party'],['Fest','Fest'],['Fashion','Fashion'] , ['Drama','Drama'], ['Others','Others']]) ,{'class':'form-control'}
+.input-group
+	=f.submit "Create Event" , class:'btn btn-primary'
+
+

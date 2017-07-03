@@ -2,7 +2,49 @@
 	.text-center
 		.h1{'style':'font-size:26px;font-weight: 800;'}
 			Explore What's Happeing Inside Campus
-			
+
+	.margin
+	.margin
+	.text-center
+		.form-group
+			%label See Whats Hapening outside your Campus
+			%select.form-control{'id':'Campuses','data-campus': "#{@campus}"}
+				%option  Jaipur
+				%option Noida
+				%option Lucknow
+				%option Mumbai
+				%option Gurgaon
+				%option Raipur
+				%option Kolkata
+				%option Greater Noida
+				%option Ranchi
+				%option Ahmedabad
+				%option Chenai
+				%option Chandigarh
+				%option Banglore
+				%option Gwalior
+				%option Bhubaeswar
+				%option Hydrabad
+				%option indore
+				%option Kochi
+				%option Patna
+				%option Pune
+				%hr
+				%option Dubai
+				%option Lodon
+				%option Mauritius
+				%option Abu Dhabi
+				%option Singapore
+				%option South Africa
+				%option Romania
+				%option China
+
+		%btn.btn.btn-primary{'id':'campusbtn'} Search
+
+
+	.margin
+	.margin
+	.h2.text-center= @campus
 	.margin
 	.margin
 	.explorehead.text-center
@@ -136,8 +178,7 @@
 				.left{'style':'font-size:16px;font-weight: 800;'} 
 					Recomended Clubs
 			%hr
-			.sugdiv.clearfix
-				
+			.sugdiv.clearfix				
 				-@sugclub.each do |sug|
 					=#change this to something else
 					#single_suggestion2.shadow
@@ -254,28 +295,77 @@
 						.like_unlike_div{id: "like_#{tc.id}"}
 							= render 'like_unlike' , c: tc
 						%hr
+
+	.margin
+	.margin
+	.h1.text-center.grey Keep calm and find your connection
+	.margin
+	.margin
+	#moreevent
+		.scrollmenu.shadow
+			.top_sug_layer.clearfix
+				.left{'style':'font-size:16px;font-weight: 800;'}
+					- if @friendships.count != 0
+						- if @friendships.count > 1
+							= @friendships.first.amitian.fullname
+							and 
+							= @friendships.count-1
+							others found their match past week
+						-elsif @friendships.count == 1
+							= @friendships.first.amitian.fullname+" "
+
+						found a match this past week
+					-else
+						.alert.alert-info
+							No Recent Matches Found
+			%hr
+			.sugdiv.clearfix
+				-@friendships.each do |sug|
+					=#change this to something else
+					#single_suggestion2.shadow
+						%table
+							%tbody
+								%tr
+									%td
+										.text-center=image_tag sug.amitian.profilepic , class: 'img-rounded'
+								%tr
+									%td{'style':'height:10px;'}
+								%tr
+									%td
+										.text-center=link_to sug.amitian.fullname , sug , 'style':' font-weight: 600;'
+								%tr
+									%td
+										%small.grey
+											.text-center= '#'+sug.amitian.nickname
+								%tr
+									%td{'style':'height:10px;'}
+
+								%tr
+									%td.text-center
 	.margin
 	.panel.panel-default
 		.panel-heading
 			.panel-title
-				.club_about_head Recently found matches
+				.club_about_head Find your own Match
 		.panel-body
-			.topconfessions
-				-@friendships.each do |tc|
-					.singletopconfession.col-sm-3.shadow.col-xs-4
-						#confessor_name
-							.userdp
-								- if !tc.amitian.profilepic?
-									-if tc.amitian.gender == 'Male'
-										=image_tag ('93.svg')
-									-else 
-										=image_tag('manager_photo.svg')
-								-else
-									=link_to image_tag(tc.amitian.profilepic), tc.amitian 
-							.username
-								=link_to tc.amitian.fullname , amitian_path(tc.amitian) 
+			-if @interest == 'Male'
+				.container-fluid
+					-@male.each do |male|
+						.matchimage.col-sm-2.thumbnail
+							-if !male.profilepic?				
+								=link_to image_tag ('93.svg') , male
+							-else
+								=link_to image_tag(male.profilepic), male 
 								
-						.topconfessimg.thumbail
+
 							
-						%hr
-	
+			-elsif @interest == 'Female'
+				.container-fluid	
+					-@female.each do |female|
+						.matchimage.col-sm-2.thumbnail
+							-if !female.profilepic?				
+								=link_to image_tag ('manager_photo.svg') , female
+							-else
+								=link_to image_tag(female.profilepic), female 
+							
+	.lead Show all the categories

@@ -2,7 +2,14 @@
 	#events_main_div
 		#index_user_detail.col-sm-3.col-xs-12
 			.text-center
-			
+				- if @event.amitian == current_amitian
+					- if @event.club_id == 0
+						%li{'data-target':'#events_create_amitian' , 'data-toggle':'modal'}
+							%a.modallink.grey  Edit Event 
+					-else
+						%li{'data-target':'#events_create' , 'data-toggle':'modal'}
+							%a.modallink.grey  Edit Event 
+	
 				= image_tag 'calendar.png' , class: 'club_themepic img-rounded'
 				.theme.h2
 					= @event.eventtheme
@@ -24,7 +31,10 @@
 						= image_tag @event.amitian.profilepic , class:'userdp'
 						=link_to @event.amitian.fullname , @event.amitian , 'style':'text-decoration:none;'
 					is organizing  
-					=@event.eventtheme+": tag, on "+@event.start.strftime("%A").to_s+", "+@event.start.strftime("%d.%B").to_s
+					=@event.eventtheme+": "
+					%b= @event.tags
+					on
+					= @event.start.strftime("%A").to_s+", "+@event.start.strftime("%d.%B").to_s
 				.location_div.flex
 					%i.material-icons.grey room
 					.location.lead
@@ -161,3 +171,5 @@
 						There are No update for the events as of now
 		
 		= render 'confessions/index_right_confession_div'
+	= render 'modals/events_create'  if @event.club_id != 0
+	= render 'modals/events_create_amitian' if @event.club_id == 0

@@ -35,7 +35,7 @@
 						.panel-title
 							What's new ?
 							%small.right 
-								=link_to 'Explore' , explore_path
+								=link_to 'Explore' , explore_path(current_amitian.campus)
 					.panel-body
 						.lead.grey
 							Welcome new joinies  
@@ -43,7 +43,13 @@
 							-@newcommers.each do |nc|	
 								.single_suggestion.row
 									.col-sm-6
-										= image_tag nc.profilepic
+										- if !nc.profilepic?
+											-if nc.gender == 'Male'
+												=link_to image_tag('93.svg'), nc
+											-else 
+												=link_to image_tag('manager_photo.svg') , nc
+										-else
+											=link_to image_tag(nc.profilepic), nc , class: 'thumbnail'
 										= link_to nc.fullname , nc
 										
 									.col-sm-4.col-sm-offset-1
@@ -142,9 +148,12 @@
 
 				#status_form_div
 					=render 'confessions_form'
-				%br
-			#info.alert.alert-danger.alert-dismissible.text-center
-				=flash[:alert] = 'Your Department seems new, you will receive feeds from "anonymous" and people from your Department, ask your friends to join. You can also Follow people from other Department to receive their Feeds. :)'
+				
+			- if @tconfessions < 50
+				#info.alert.alert-danger.text-center
+					%p 
+						%b Your Department seems new, you will receive feeds from "anonymous" and people from your Department, ask your friends to join. You can also Follow people from other Department to receive their Feeds. :)
+			
 			.scrollmenu.shadow
 				.top_sug_layer.clearfix
 					.left.grey{'style':'font-size:19px;'} SUGGESTED
@@ -157,7 +166,14 @@
 									%tbody
 										%tr
 											%td
-												.text-center=image_tag sug.profilepic , class: 'img-rounded'
+												.text-center
+													- if !sug.profilepic?
+														-if sug.gender == 'Male'
+															=image_tag '93.svg'
+														-else 
+															=image_tag 'manager_photo.svg' 
+													-else
+														=link_to image_tag(sug.profilepic), sug , class: 'img-rounded'
 										%tr
 											%td{'style':'height:10px;'}
 										%tr
@@ -186,9 +202,3 @@
 =render 'modals/feedback'
 =render 'modals/club_create'
 = render 'modals/events_create_amitian'
-
-:javascript
-	var consize = #{@tconfessions}
-	if (consize < 60){
-		document.getElementById('info').style.display = 'block';
-	}

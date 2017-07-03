@@ -7,33 +7,5 @@
 						.alert.alert-info
 							%li= message
 				= hidden_field_tag :club_id , @club.id
-				.input_group
-					= f.label :Name
-					=f.text_field :eventtheme
-				.input_group
-					= f.label :EventTagLine
-					= f.text_field :tags
-				.input_group
-					= f.label :Location
-					=f.text_field :location
-				.input_group
-					= f.label :StartTime
-					=f.datetime_local_field :start
-				.input_group
-					= f.label :EndTime
-					=f.datetime_local_field :endtime
-				.input_group
-					= f.label :AboutEvent
-					=f.text_area :description
-				.input_group
-					=f.file_field :event_themepic
-				.input_group
-					= f.label :department
-					=f.text_field :department
-				.input_group
-					=f.label :niche
-					=f.select :niche, options_for_select([['Entertainment','Entertainment'],['Dance','Dance'],['Technical','Technical'],['Music' , 'Music'] ,['Party','Party'],['Fest','Fest'],['Fashion','Fashion'] , ['Drama','Drama'], ['Others','Others']]) ,{'class':'form-control'}
-				.input-group
-					=f.submit "Create Event" , class:'btn btn-primary'
-				
-
+				= hidden_field_tag :campus , current_amitian.campus
+				=render 'modals/event_form' , f: f

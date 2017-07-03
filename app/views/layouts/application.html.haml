@@ -68,7 +68,7 @@
 										%ul.dropdown-menu
 											%li= link_to current_amitian.fullname , current_amitian
 											%li= link_to 'My Hotlists' ,hotlisting_amitian_path(current_amitian)
-											%li= link_to 'Explore' , explore_path
+											%li= link_to 'Explore' , explore_path(current_amitian.campus)
 											%li= link_to 'Settings' , edit_amitian_registration_path(current_amitian)
 											%li=link_to 'Sign Out', destroy_amitian_session_path, method: :delete , data: {confirm: 'Are you sure ?'}
 								-else

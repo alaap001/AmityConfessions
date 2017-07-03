@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   get 'chatrooms/index'
 
-  get 'explore' , to: 'confessions#explore'
+  get 'explore/:campus' , to: 'confessions#explore' ,as: :explore
+  get 'clubs/:id/photos' , to: "clubs#photos" , as: :clubphotos
 
 devise_for :amitians, controllers: { sessions: 'amitians/sessions' }, path: '',path_names: { sign_in: 'login', sign_out: 'logout'}
 
@@ -15,6 +16,8 @@ root 'home#index'
    get :hotlisting
     end
 end
+
+get 'amitians/:id/photos' , to: 'amitians#photos' , as: :photos
 
 resources :clubs
 resources :clubposts do
@@ -60,6 +63,8 @@ resources :conversations , only: [:create ]  do
     end
     resources :messages, only: [:create]
   end
+
+  
 
 resources :feeling , only: [:index]
 resources :relationships, only: [:create, :destroy]
