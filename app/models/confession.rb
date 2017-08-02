@@ -6,5 +6,5 @@ class Confession < ApplicationRecord
   acts_as_votable
   mount_uploader :confessionimage , ConfessionimageUploader
   has_many :notifications, dependent: :destroy
-
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
 end

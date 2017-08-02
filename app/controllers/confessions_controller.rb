@@ -20,7 +20,7 @@ else
 
     newclubs = Club.where.not(amitian_id: current_amitian).limit(5).order('RAND()')
     
-    @newclubs = newclubs.where(created_at: Time.now-15.days .. Time.now).limit(4)
+    @newclubs = newclubs.where(created_at: Time.now-35.days .. Time.now).limit(4)
     
     @newevents = Event.where(start: Time.now .. Time.now+ 7.days).limit(4).order('start ASC')
     
@@ -44,7 +44,7 @@ else
     
     @confessions= Confession.where(amitian_id: ids).paginate(page: params[:page], per_page: 15).order('created_at DESC')
     
-    newcommers = Amitian.where(created_at: Time.now-15.days .. Time.now).limit(10).order('RAND()')
+    newcommers = Amitian.where(created_at: Time.now-35.days .. Time.now).limit(10).order('RAND()')
     
     newcommersid = current_amitian.following.ids + Array.[](current_amitian.id)
     
@@ -76,13 +76,18 @@ end
 end
 end
 
+def tags
+@confessions = Confession.tagged_with(params[:tag])
+
+end
+
 def explore
 if current_amitian.about_amitian == nil
   redirect_to new_about_amitian_url
 else
 mainevent = Event.where(start: Time.now-1.days .. Time.now+1.days)
 
-mainevent = Event.find_by_sql(" SELECT events.*, COUNT(events.id) AS total_followers
+mainevent = mainevent.find_by_sql(" SELECT events.*, COUNT(events.id) AS total_followers
   FROM events
   INNER JOIN follows ON events.id = follows.id
   GROUP BY follows.id
@@ -198,7 +203,7 @@ end
 
 private
 def confession_params
-	params.require(:confession).permit(:confession,:confessionimage,:campus_confession,:remove_confessionimage,:postid)
+	params.require(:confession).permit(:confession,:confessionimage,:campus_confession,:remove_confessionimage,:postid, :tag_list)
 	end
 end
 

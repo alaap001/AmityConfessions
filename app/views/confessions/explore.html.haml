@@ -1,7 +1,7 @@
 #index_main_div.container
 	.text-center
 		.h1{'style':'font-size:26px;font-weight: 800;'}
-			Explore What's Happeing Inside Campus
+			Explore What's Happeing Inside Campuses
 
 	.margin
 	.margin
@@ -353,9 +353,9 @@
 					-@male.each do |male|
 						.matchimage.col-sm-2.thumbnail
 							-if !male.profilepic?				
-								=link_to image_tag ('93.svg') , male
+								=link_to image_tag('93.svg') , male ,'title': "#{male.fullname}"
 							-else
-								=link_to image_tag(male.profilepic), male 
+								=link_to image_tag(male.profilepic), male ,'title': "#{male.fullname}" 
 								
 
 							
@@ -364,8 +364,8 @@
 					-@female.each do |female|
 						.matchimage.col-sm-2.thumbnail
 							-if !female.profilepic?				
-								=link_to image_tag ('manager_photo.svg') , female
+								=link_to image_tag('manager_photo.svg') , female,'title': "#{female.fullname}" 
 							-else
-								=link_to image_tag(female.profilepic), female 
+								=link_to image_tag(female.profilepic), female,'title': "#{female.fullname}" 
 							
 	.lead Show all the categories

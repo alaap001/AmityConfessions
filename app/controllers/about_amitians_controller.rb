@@ -12,6 +12,8 @@ if current_amitian.about_amitian == nil && @amitian == current_amitian
 	redirect_to new_about_amitian_url
 elsif current_amitian.about_amitian == nil && @amitian != current_amitian
 end
+
+@clubs = Club.where(amitian_id: @amitian)
 end
 
   def new

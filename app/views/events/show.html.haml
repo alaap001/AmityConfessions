@@ -2,14 +2,6 @@
 	#events_main_div
 		#index_user_detail.col-sm-3.col-xs-12
 			.text-center
-				- if @event.amitian == current_amitian
-					- if @event.club_id == 0
-						%li{'data-target':'#events_create_amitian' , 'data-toggle':'modal'}
-							%a.modallink.grey  Edit Event 
-					-else
-						%li{'data-target':'#events_create' , 'data-toggle':'modal'}
-							%a.modallink.grey  Edit Event 
-	
 				= image_tag 'calendar.png' , class: 'club_themepic img-rounded'
 				.theme.h2
 					= @event.eventtheme
@@ -18,6 +10,13 @@
 					( #	
 					= @event.niche+' )'
 			.margin
+			- if @event.amitian == current_amitian
+				- if @event.club_id == 0
+					%li{'data-target':'#events_create_amitian' , 'data-toggle':'modal'}
+						%a.modallink.grey  Edit Event 
+				-else
+					%li{'data-target':'#events_create' , 'data-toggle':'modal'}
+						%a.modallink.grey  Edit Event 
 			.white.shadow{'style':'padding:10px;'}
 				.event_date.text-center
 					.date= @event.start.strftime("%d")

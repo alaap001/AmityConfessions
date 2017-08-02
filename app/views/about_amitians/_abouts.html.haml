@@ -1,0 +1,77 @@
+.h1.text-center.grey
+	= @amitian.fullname
+.form-group
+	%b Email:
+	%em.form-control= @amitian.email
+.form-group
+	%b Campus: 
+	%em.form-control=@amitian.campus
+- if @amitian.alumni
+	.form-group
+		%b Memories of college: 
+		%em.form-control=about.memories
+.form-group
+	%b Institute: 
+	%em.form-control=@amitian.institute
+.form-group
+	%b Last Seen: 
+	%em.form-control=(@amitian.last_sign_in_at).to_date.to_s
+.form-group
+	%b Relationship Status:
+	%em.form-control= about.relationship_status
+.form-group
+	%b Interested In: 
+	%em.form-control=about.interest
+.form-group
+	%b Gender: 
+	%em.form-control=@amitian.gender
+.form-group
+	%b Date of Birth: 
+	%em.form-control= about.dob 
+.form-group
+	%b Course: 
+	%em.form-control=about.course
+.form-group
+	%b Graduation Year: 
+	%em.form-control=about.graduation_year
+.form-group
+	%b Catch Phrase:
+	'
+	%em.form-control= about.catch_phrase
+	'
+.form-group
+	%b My Life: 
+	%em.form-control=about.bio
+.form-group
+	%span.glyphicon.glyphicon-calendar
+	%b Joined on:
+	%em.form-control= (@amitian.created_at).to_date.to_s
+%hr
+.container-fluid.white.shadow
+	#about_friends
+		%h1 Connections:
+		-if @friends.count == 0
+			.text-center
+				- if @amitian == current_amitian
+					You are not connected to anyone
+					%br
+					=link_to 'Make Connections' , feeling_index_path
+				-else
+					= @amitian.fullname+' is not connected to anyone'
+		-@friends.each do |f|
+			.col-md-3.col-sm-4
+				.flex
+					#profile_image
+						=image_tag f.profilepic
+					%h3=link_to f.fullname , f
+					
+%hr
+	#about_confessions
+		%h1 Top 3 confessions
+		-if @confessions.count == 0
+			.text-center
+				No Confessions for 
+				=@amitian.fullname
+		-@confessions.each do |c|
+			.col-md-6.col-sm-6.col-xs-12
+				=render 'confessions/confessions' ,c: c

@@ -1,93 +1,41 @@
 #index_main_div
 	=render 'amitians/show_profile_head'
-	#show_user_detail.container
+	.container-fluid
 		- if @amitian.about_amitian != nil
 			-about = @amitian.about_amitian
 			=link_to 'Edit' , edit_about_amitian_path(@amitian) , class: 'right' if @amitian == current_amitian
-			%br
-			%h2 
-				= @amitian.fullname
-			#about123 
-				%b Email:
-				%em= @amitian.email
-			#about123
-				%b Campus: 
-				%em=@amitian.campus
-			- if @amitian.alumni
-				#about123
-					%b Memories of college: 
-					%em=about.memories
-			#about123
-				%b Institute: 
-				%em=@amitian.institute
-			#about123
-				%b Last Seen: 
-				%em=(@amitian.last_sign_in_at).to_date.to_s
-			#about123
-				%b Relationship Status:
-				%em= about.relationship_status
-			#about123
-				%b Interested In: 
-				%em=about.interest
-			#about123
-				%b Gender: 
-				%em=@amitian.gender
-			#about123
-				%b Date of Birth: 
-				%em= about.dob 
-			#about123
-				%b Course: 
-				%em=about.course
-			#about123
-				%b Graduation Year: 
-				%em=about.graduation_year
-			#about123
-				%b Catch Phrase:
-				'
-				%em= about.catch_phrase
-				'
-			#about123
-				%b My Life: 
-				%em=about.bio
-			#abour123
-				%span.glyphicon.glyphicon-calendar
-				%b Joined on:
-				%em= (@amitian.created_at).to_date.to_s
-			%hr
-			.row
-				#about_friends
-					%h1 Connections:
-					-if @friends.count == 0
-						.text-center
-							- if @amitian == current_amitian
-								You are not connected to anyone
-								%br
-								=link_to 'Make Connections' , feeling_index_path
-							-else
-								= @amitian.fullname+' is not connected to anyone'
-					-@friends.each do |f|
-						.col-md-3.col-sm-4
-							.flex
-								#profile_image
-									=image_tag f.profilepic
-								%h3=link_to f.fullname , f
-								%br
-			%hr
-				#about_confessions
-					%h1 Top 3 confessions
-					-if @confessions.count == 0
-						.text-center
-							No Confessions for 
-							=@amitian.fullname
-					-@confessions.each do |c|
-						.col-md-6.col-sm-6.col-xs-12
-							=render 'confessions/confessions' ,c: c
+			.container-fluid.clearfix
+				.tab
+					%button.tablink{ onclick:"openCity(event, 'about')"}
+						About
+					%button.tablink{ onclick:"openCity(event, 'clubs')"}
+						Clubs
+					%button.tablink{ onclick:"openCity(event, 'events')"}
+						Events
+					%button.tablink{ onclick:"openCity(event, 'followers')"}
+						Followers
+					%button.tablink{ onclick:"openCity(event, 'follows')"}
+						Follows
+				#about.tabcontent
+					= render 'abouts' , about: about
 
+				#clubs.tabcontent
+					.h1.grey.text-center clubs
+					- @clubs.each do |club|
+						=render 'clubs' , club: club
+				#events
+
+				#followers
+				#follows
 		- else
-			'nothing to show'
+			.alert.alert-info
+				%p 
+					No Abouts for
+					= @amitian.fullname
 
-%footer.footer
-	= render 'home/footer'
+
+	%footer.footer
+		= render 'home/footer'
 	=# first part my details 
 	=# second part my connections / friends 
 	=# third part my top 5 confessions

@@ -7,6 +7,10 @@
 					=f.text_area :confession , require: true, placeholder: 'Confess !!' , class: 'form-control' , 'id':'contentbox'
 					=f.label :postAs
 					=f.select(:postid,options_for_select([[@confession.amitian.fullname,@confession.amitian.fullname],[a.fullname,a.fullname]]), class: 'form-control') 
+				.form-inline
+					= f.label :Tags , "Tags"
+					= f.text_field :tag_list , placeholder: 'Separate by commas' , class: 'form-control'
+				%br
 				=f.file_field :confessionimage , class: 'form-control-file confession_file_image'
 				.confession_img_preview
 					=image_tag @confession.confessionimage , class:'thumbnail' 

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'explore/:campus' , to: 'confessions#explore' ,as: :explore
   get 'clubs/:id/photos' , to: "clubs#photos" , as: :clubphotos
-
+  get 'tags/:tag' , to: 'confessions#tags' , as: :tags
 devise_for :amitians, controllers: { sessions: 'amitians/sessions' }, path: '',path_names: { sign_in: 'login', sign_out: 'logout'}
 
 root 'home#index'

@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
+  socket: MySQL
   username: root
   password: xperiap1323
-  socket: MySQL
   host: localhost
 
 development:

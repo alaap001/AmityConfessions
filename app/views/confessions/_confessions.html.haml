@@ -24,9 +24,12 @@
 			%p= time_ago_in_words(c.created_at)+' ago'
 	#confession_image{class: "confession_#{c.id}"}
 		#confession_content
-			%p= auto_link(simple_format(c.confession[0..350]))
+			%p
+				= auto_link(simple_format(c.confession[0..350]))
+				= raw c.tag_list.map { |t| link_to '#'+t , tags_path(t)}.join(', ')
 			-if c.confession.size > 350
 				= link_to 'load full confession' , c
+
 		=image_tag(c.confessionimage,{'class':'thumbnail'}) if c.confessionimage?
 		 
 		%br

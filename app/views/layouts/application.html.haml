@@ -38,7 +38,7 @@
 													%p
 														You have 
 														= current_amitian.notifications.where(read: false).count-7
-														more notifications
+														more unread notifications
 											%li.divider{ role: 'separator' }
 												%li.text-center= link_to 'View All', notifications_path
 									%li.dropdown.notification-dropdown
